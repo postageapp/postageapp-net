@@ -1,0 +1,10 @@
+C:\Users\Derek\documents\visual studio 2012\Projects\PostageApp\Tests\bin\Debug\Tests.dll
+C:\Users\Derek\documents\visual studio 2012\Projects\PostageApp\Tests\bin\Debug\Tests.pdb
+C:\Users\Derek\documents\visual studio 2012\Projects\PostageApp\Tests\obj\Debug\Tests.csprojResolveAssemblyReference.cache
+C:\Users\Derek\documents\visual studio 2012\Projects\PostageApp\Tests\obj\Debug\Tests.dll
+C:\Users\Derek\documents\visual studio 2012\Projects\PostageApp\Tests\obj\Debug\Tests.pdb
+C:\Users\Derek\documents\visual studio 2012\Projects\PostageApp\Tests\bin\Debug\PostageApp.dll
+C:\Users\Derek\documents\visual studio 2012\Projects\PostageApp\Tests\bin\Debug\PostageApp.pdb
+C:\Users\Derek\documents\visual studio 2012\Projects\PostageApp\Tests\bin\Debug\Tests.dll.config
+C:\Users\Derek\documents\visual studio 2012\Projects\PostageApp\Tests\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Derek\documents\visual studio 2012\Projects\PostageApp\Tests\bin\Debug\Newtonsoft.Json.xml
