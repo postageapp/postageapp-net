@@ -206,6 +206,22 @@ namespace Tests
             });
 
             Assert.AreEqual(SendMessageResponseStatus.Ok, response.Status);
-        }    
+        }
+
+        [TestMethod]
+        public void TestSendMessageWithDifferentEncodings()
+        {
+            var client = new Client(ApiKey);
+
+            var response = client.SendMessage(new SendMessageRequest()
+            {
+                Uid = Guid.NewGuid().ToString(),
+                Subject = "\xfeStarts with an invalid utf-8 character",
+                Recipient = "test@null.postageapp.com",
+                RecipientOverride = RecipientOverride,
+                Text = "This email contains invalid utf8"
+            });
+            
+        }
     }
 }
