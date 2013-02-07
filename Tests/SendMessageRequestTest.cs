@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using PostageApp;
@@ -9,6 +11,23 @@ namespace Tests
     public class SendMessageRequestTest
     {
         private const string ApiKey = "abc123";
+
+        private Stream GenerateStreamFromString(string s)
+        {
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(s);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
+        }
+
+        static byte[] GetBytes(string str)
+        {
+            var bytes = new byte[str.Length * sizeof(char)];
+            System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
+            return bytes;
+        }
 
         [TestMethod]
         public void TestJsonSerializationIncludesApiKey()
@@ -138,13 +157,14 @@ namespace Tests
         [TestMethod]
         public void TestJsonSerializationIncludesAttachments()
         {
+            const string fileContents = "this is my file content";
+
             var r = new SendMessageRequest()
                 {
                     Attachments = new List<Attachment>()
                         {
-                            new Attachment()
+                            new Attachment(GenerateStreamFromString(fileContents))
                                 {
-                                    Content = "this is the content of my file. Wrong format!",
                                     ContentType = "text/plain",
                                     Filename = "notes.txt"
                                 }
@@ -155,7 +175,7 @@ namespace Tests
             var o = JObject.Parse(json);
 
             Assert.AreEqual("text/plain", o["arguments"]["attachments"]["notes.txt"]["content_type"]);
-            Assert.AreEqual("this is the content of my file. Wrong format!", o["arguments"]["attachments"]["notes.txt"]["content"]);
+            Assert.AreEqual("dGhpcyBpcyBteSBmaWxlIGNvbnRlbnQ=", o["arguments"]["attachments"]["notes.txt"]["content"]);
         }
     }
 }

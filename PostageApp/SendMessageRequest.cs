@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 
 namespace PostageApp
 {
@@ -20,7 +22,14 @@ namespace PostageApp
     {
         public string Filename { get; set; }
         public string ContentType { get; set; }
-        public string Content { get; set; }
+        public string Content { get; private set; }
+
+        public Attachment(Stream stream)
+        {
+            var bytes = new byte[stream.Length];
+            stream.Read(bytes, 0, Convert.ToInt32(stream.Length));
+            Content = Convert.ToBase64String(bytes);
+        }
     }
 
     public class Content
