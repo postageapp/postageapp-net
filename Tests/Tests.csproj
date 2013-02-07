@@ -57,8 +57,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ClientTest.cs" />
-    <Compile Include="DTO\SendMessageRequestTest.cs" />
+    <Compile Include="SendMessageRequestTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SendMessageResponseTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PostageApp\PostageApp.csproj">
@@ -70,6 +71,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

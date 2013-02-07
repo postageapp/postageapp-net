@@ -3,3 +3,4 @@ PostageApp/bin/
 Tests/obj
 Tests/bin
 PostageApp/obj
+*.suo

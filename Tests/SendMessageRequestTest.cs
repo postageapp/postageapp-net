@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
-using PostageApp.DTO;
+using PostageApp;
 
-namespace Tests.DTO
+namespace Tests
 {
     [TestClass]
     public class SendMessageRequestTest

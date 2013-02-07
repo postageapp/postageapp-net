@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace PostageApp.DTO
+namespace PostageApp
 {
     public class Recipient
     {
