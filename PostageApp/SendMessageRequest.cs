@@ -57,17 +57,17 @@ namespace PostageApp
             if (Uid != null)
                 root.Add(new JProperty("uid", Uid));
 
+            var arguments = new JObject();
+            root.Add(new JProperty("arguments", arguments));
+
             if (Content.Html != null || Content.Text != null)
             {
                 var content = new JObject();
-                root.Add(new JProperty("content", content));
+                arguments.Add(new JProperty("content", content));
 
                 if (Content.Text != null) content.Add("text/plain", new JValue(Content.Text));
                 if (Content.Html != null) content.Add("text/html", new JValue(Content.Html));
             }
-
-            var arguments = new JObject();
-            root.Add(new JProperty("arguments", arguments));
 
             if (Recipients.Count > 0)
             {
@@ -119,7 +119,7 @@ namespace PostageApp
                 }
             }
 
-            return root.ToString(Formatting.Indented);
+            return root.ToString(Formatting.None);
         }
     }
 }

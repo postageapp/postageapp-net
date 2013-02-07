@@ -22,26 +22,6 @@ namespace Tests
         }
 
         [TestMethod]
-        public void TestJsonSerializationIncludesContent()
-        {
-            var r = new SendMessageRequest()
-                {
-                    Content = new Content()
-                    {
-                        Text = "my content",
-                        Html = "<h1>my content</h1>"
-                    }
-                };
-
-            var json = r.ToJson(ApiKey);
-            var o = JObject.Parse(json);
-
-            Assert.IsNotNull(o["content"]);
-            Assert.AreEqual(o["content"]["text/plain"], "my content");
-            Assert.AreEqual(o["content"]["text/html"], "<h1>my content</h1>");
-        }
-
-        [TestMethod]
         public void TestJsonSerializationIncludesUid()
         {
             const string uid = "27cf6ede7501a32d54d22abe17e3c154d2cae7f3";
@@ -51,6 +31,26 @@ namespace Tests
             var o = JObject.Parse(json);
 
             Assert.AreEqual(uid, o["uid"]);
+        }
+
+        [TestMethod]
+        public void TestJsonSerializationIncludesContent()
+        {
+            var r = new SendMessageRequest()
+            {
+                Content = new Content()
+                {
+                    Text = "my content",
+                    Html = "<h1>my content</h1>"
+                }
+            };
+
+            var json = r.ToJson(ApiKey);
+            var o = JObject.Parse(json);
+
+            Assert.IsNotNull(o["arguments"]["content"]);
+            Assert.AreEqual(o["arguments"]["content"]["text/plain"], "my content");
+            Assert.AreEqual(o["arguments"]["content"]["text/html"], "<h1>my content</h1>");
         }
 
         [TestMethod]

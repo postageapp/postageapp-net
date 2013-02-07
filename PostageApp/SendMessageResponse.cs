@@ -24,7 +24,7 @@ namespace PostageApp
 
         public SendMessageResponse(string json)
         {
-            ParseJson(json);            
+            ParseJson(json);
         }
 
         private SendMessageResponseStatus ParseStatus(string status)
@@ -47,7 +47,7 @@ namespace PostageApp
                     return SendMessageResponseStatus.PreconditionFailed;
                 default:
                     return SendMessageResponseStatus.Unknown;
-            }            
+            }
         }
 
         private void ParseJson(string json)

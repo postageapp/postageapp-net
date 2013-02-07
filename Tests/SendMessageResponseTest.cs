@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PostageApp;
 
-
 namespace Tests
 {
     [TestClass]
