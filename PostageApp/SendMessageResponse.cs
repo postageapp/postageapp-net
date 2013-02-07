@@ -56,7 +56,7 @@ namespace PostageApp
             dataStream.Close();
             response.Close();
 
-            if (response.ContentType.Equals("application/json"))
+            if (response.ContentType.StartsWith("application/json"))
                 ParseJson(responseFromServer);
         }
 
