@@ -50,32 +50,35 @@ namespace PostageApp
             }
         }
 
+        private void ParseJsonResponse(JToken o)
+        {
+            if (o == null) return;
+            if (o["uid"] != null)
+                Uid = o["uid"].ToString();
+
+            if (o["message"] != null)
+                ErrorMessage = o["message"].ToString();
+
+            if (o["status"] != null)
+                Status = ParseStatus(o["status"].ToString());
+        }
+
+        private void ParseJsonData(JToken o)
+        {
+            if (o == null) return;
+            if (o["message"] == null) return;
+
+            uint messageId;
+            if (o["message"]["id"] != null)
+                if (UInt32.TryParse(o["message"]["id"].ToString(), out messageId))
+                    MessageId = messageId;            
+        }
+
         private void ParseJson(string json)
         {
             var o = JObject.Parse(json);
-
-            if (o["response"] != null)
-            {
-                if (o["response"]["uid"] != null)
-                    Uid = o["response"]["uid"].ToString();
-
-                if (o["response"]["message"] != null)
-                    ErrorMessage = o["response"]["message"].ToString();
-
-                if (o["response"]["status"] != null)
-                    Status = ParseStatus(o["response"]["status"].ToString());
-            }
-
-            if (o["data"] != null)
-            {
-                if (o["data"]["message"] != null)
-                {
-                    uint messageId;
-                    if (o["data"]["message"]["id"] != null)
-                        if (UInt32.TryParse(o["data"]["message"]["id"].ToString(), out messageId))
-                            MessageId = messageId;
-                }
-            }
+            ParseJsonResponse(o["response"]);
+            ParseJsonData(o["data"]);
         }
     }
 }
