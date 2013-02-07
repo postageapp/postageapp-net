@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using PostageApp;
@@ -108,7 +107,7 @@ namespace Tests
             var json = r.ToJson(ApiKey);
             var o = JObject.Parse(json);
 
-            Assert.AreEqual(ApiKey, o["arguments"]["recipient_override"]);
+            Assert.AreEqual("test@null.postageapp.com", o["arguments"]["recipient_override"]);
         }
 
 
