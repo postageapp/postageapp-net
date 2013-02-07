@@ -9,3 +9,4 @@ Tests/bin/*
 Tests/obj/*
 PostageApp/obj/Debug/PostageApp.csproj.FileListAbsolute.txt
 Tests/bin/
+PostageApp/obj/

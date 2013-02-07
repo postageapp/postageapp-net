@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -24,24 +25,26 @@ namespace PostageApp
         public string ContentType { get; set; }
         public string Content { get; private set; }
 
-        public Attachment(Stream stream)
+        public Attachment(Stream stream, string filename, string contentType = "application/octet-stream")
         {
             var bytes = new byte[stream.Length];
             stream.Read(bytes, 0, Convert.ToInt32(stream.Length));
             Content = Convert.ToBase64String(bytes);
-        }
-    }
 
-    public class Content
-    {
-        public string Text { get; set; }
-        public string Html { get; set; }
+            ContentType = contentType;
+            Filename = filename;
+        }
+
+        public Attachment(HttpPostedFile httpPostedFile) : this(httpPostedFile.InputStream, httpPostedFile.FileName, httpPostedFile.ContentType)
+        {
+        }
     }
 
     public class SendMessageRequest
     {
         public string Uid { get; set; }
-        public Content Content { get; set; }
+        public string Text { get; set; }
+        public string Html { get; set; }
         public string Template { get; set; }
         public IList<Attachment> Attachments { get; set; }
         public IList<Recipient> Recipients { get; set; }
@@ -50,9 +53,14 @@ namespace PostageApp
         public IDictionary<string, string> Headers { get; set; }
         public string RecipientOverride { get; set; }
 
+        // shortcuts
+        public string Recipient { get; set; }
+        public string Subject { get; set; }
+        public string From { get; set; }
+        public string ReplyTo { get; set; }
+
         public SendMessageRequest()
         {
-            Content = new Content();
             Attachments = new List<Attachment>();
             Recipients = new List<Recipient>();
             Variables = new Dictionary<string, string>();
@@ -69,19 +77,22 @@ namespace PostageApp
             var arguments = new JObject();
             root.Add(new JProperty("arguments", arguments));
 
-            if (Content.Html != null || Content.Text != null)
+            if (Html != null || Text != null)
             {
                 var content = new JObject();
                 arguments.Add(new JProperty("content", content));
 
-                if (Content.Text != null) content.Add("text/plain", new JValue(Content.Text));
-                if (Content.Html != null) content.Add("text/html", new JValue(Content.Html));
+                if (Text != null) content.Add("text/plain", new JValue(Text));
+                if (Html != null) content.Add("text/html", new JValue(Html));
             }
 
-            if (Recipients.Count > 0)
+            if (Recipient != null || Recipients.Count > 0)
             {
                 var recipients = new JObject();
                 arguments.Add(new JProperty("recipients", recipients));
+
+                if (Recipient != null)
+                    recipients.Add(new JProperty(Recipient, new JObject()));
 
                 foreach (var r in Recipients)
                 {
@@ -92,6 +103,9 @@ namespace PostageApp
                         variables.Add(new JProperty(k, r.Variables[k]));
                 }
             }
+
+            if (RecipientOverride != null)
+                arguments.Add(new JProperty("recipient_override", RecipientOverride));
 
             if (Template != null)
                 arguments.Add(new JProperty("template", Template));
@@ -105,10 +119,19 @@ namespace PostageApp
                     variables.Add(new JProperty(k, Variables[k]));                
             }
 
-            if (Headers.Count > 0)
+            if (Subject != null || From != null || ReplyTo != null || Headers.Count > 0)
             {
                 var headers = new JObject();
                 arguments.Add(new JProperty("headers", headers));
+
+                if (Subject != null)
+                    headers.Add(new JProperty("Subject", Subject));
+
+                if (From != null)
+                    headers.Add(new JProperty("From", From));
+
+                if (ReplyTo != null)
+                    headers.Add(new JProperty("Reply-To", ReplyTo));
 
                 foreach (var k in Headers.Keys)
                     headers.Add(new JProperty(k, Headers[k]));

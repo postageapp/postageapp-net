@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using PostageApp;
+using Tests.Extensions;
 
 namespace Tests
 {
@@ -11,23 +11,6 @@ namespace Tests
     public class SendMessageRequestTest
     {
         private const string ApiKey = "abc123";
-
-        private Stream GenerateStreamFromString(string s)
-        {
-            var stream = new MemoryStream();
-            var writer = new StreamWriter(stream);
-            writer.Write(s);
-            writer.Flush();
-            stream.Position = 0;
-            return stream;
-        }
-
-        static byte[] GetBytes(string str)
-        {
-            var bytes = new byte[str.Length * sizeof(char)];
-            System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
-            return bytes;
-        }
 
         [TestMethod]
         public void TestJsonSerializationIncludesApiKey()
@@ -53,23 +36,38 @@ namespace Tests
         }
 
         [TestMethod]
-        public void TestJsonSerializationIncludesContent()
+        public void TestJsonSerializationIncludesText()
         {
-            var r = new SendMessageRequest()
-            {
-                Content = new Content()
-                {
-                    Text = "my content",
-                    Html = "<h1>my content</h1>"
-                }
-            };
+            var r = new SendMessageRequest() { Text = "my content" };
 
             var json = r.ToJson(ApiKey);
             var o = JObject.Parse(json);
 
             Assert.IsNotNull(o["arguments"]["content"]);
             Assert.AreEqual(o["arguments"]["content"]["text/plain"], "my content");
+        }
+
+        [TestMethod]
+        public void TestJsonSerializationIncludesHtml()
+        {
+            var r = new SendMessageRequest() { Html = "<h1>my content</h1>" };
+
+            var json = r.ToJson(ApiKey);
+            var o = JObject.Parse(json);
+
+            Assert.IsNotNull(o["arguments"]["content"]);
             Assert.AreEqual(o["arguments"]["content"]["text/html"], "<h1>my content</h1>");
+        }
+
+        [TestMethod]
+        public void TestJsonSerializationIncludesRecipient()
+        {
+            var r = new SendMessageRequest() { Recipient = "test@null.postageapp.com" };
+
+            var json = r.ToJson(ApiKey);
+            var o = JObject.Parse(json);
+
+            Assert.IsNotNull(o["arguments"]["recipients"]["test@null.postageapp.com"]);
         }
 
         [TestMethod]
@@ -93,10 +91,7 @@ namespace Tests
                         }
                 };
 
-            var r = new SendMessageRequest()
-                {
-                    Recipients = recipients
-                };
+            var r = new SendMessageRequest() { Recipients = recipients };
 
             var json = r.ToJson(ApiKey);
             var o = JObject.Parse(json);
@@ -104,6 +99,18 @@ namespace Tests
             Assert.AreEqual("Steve Gutenberg", o["arguments"]["recipients"]["test@null.postageapp.com"]["actor"]);
             Assert.AreEqual("Steve Martin", o["arguments"]["recipients"]["test2@null.postageapp.com"]["actor"]);
         }
+
+        [TestMethod]
+        public void TestJsonSerializationIncludesRecipientOverride()
+        {
+            var r = new SendMessageRequest() { RecipientOverride = "test@null.postageapp.com" };
+
+            var json = r.ToJson(ApiKey);
+            var o = JObject.Parse(json);
+
+            Assert.AreEqual(ApiKey, o["arguments"]["recipient_override"]);
+        }
+
 
         [TestMethod]
         public void TestJsonSerializationIncludesTemplate()
@@ -136,6 +143,42 @@ namespace Tests
         }
 
         [TestMethod]
+        public void TestJsonSerializationIncludesFromHeader()
+        {
+            var r = new SendMessageRequest() { From = "test@null.postageapp.com" };
+
+            var json = r.ToJson(ApiKey);
+            var o = JObject.Parse(json);
+
+            Assert.IsNotNull(o["arguments"]["headers"]);
+            Assert.AreEqual("test@null.postageapp.com", o["arguments"]["headers"]["From"]);
+        }
+
+        [TestMethod]
+        public void TestJsonSerializationIncludesSubjectHeader()
+        {
+            var r = new SendMessageRequest() { Subject = "Hello world" };
+
+            var json = r.ToJson(ApiKey);
+            var o = JObject.Parse(json);
+
+            Assert.IsNotNull(o["arguments"]["headers"]);
+            Assert.AreEqual("Hello world", o["arguments"]["headers"]["Subject"]);
+        }
+
+        [TestMethod]
+        public void TestJsonSerializationIncludesReplyToHeader()
+        {
+            var r = new SendMessageRequest() { ReplyTo = "test@null.postageapp.com" };
+
+            var json = r.ToJson(ApiKey);
+            var o = JObject.Parse(json);
+
+            Assert.IsNotNull(o["arguments"]["headers"]);
+            Assert.AreEqual("test@null.postageapp.com", o["arguments"]["headers"]["Reply-To"]);
+        }
+
+        [TestMethod]
         public void TestJsonSerializationIncludesHeaders()
         {
             var r = new SendMessageRequest()
@@ -159,15 +202,11 @@ namespace Tests
         {
             const string fileContents = "this is my file content";
 
-            var r = new SendMessageRequest()
+            var r = new SendMessageRequest
                 {
                     Attachments = new List<Attachment>()
                         {
-                            new Attachment(GenerateStreamFromString(fileContents))
-                                {
-                                    ContentType = "text/plain",
-                                    Filename = "notes.txt"
-                                }
+                            new Attachment(fileContents.ToStream(), "notes.txt", "text/plain")
                         }
                 };
 
