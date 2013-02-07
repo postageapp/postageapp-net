@@ -21,12 +21,99 @@ namespace Tests
         }
 
         [TestMethod]
-        public void TestSendMessage()
+        public void TestSendMessageInvalidDomain()
+        {
+            var client = new Client(ApiKey)
+                {
+                    BaseUri = "http://0.0.0.0/"
+                };
+
+            var threwException = false;
+            try
+            {
+                client.SendMessage(new SendMessageRequest());
+            }
+            catch (SendMessageException e)
+            {
+                threwException = true;
+                Assert.AreEqual(502, e.StatusCode);
+                Assert.AreEqual(SendMessageResponseStatus.Unknown, e.SendMessageResponse.Status);
+            }
+
+            Assert.IsTrue(threwException);
+        }
+
+        [TestMethod]
+        public void TestSendMessageBadRequest()
+        {
+            var client = new Client(ApiKey);
+
+            var threwException = false;
+            try
+            {
+                client.SendMessage(new SendMessageRequest());
+            }
+            catch (SendMessageException e)
+            {
+                threwException = true;
+                Assert.AreEqual(400, e.StatusCode);
+                Assert.AreEqual(SendMessageResponseStatus.BadRequest, e.SendMessageResponse.Status);
+            }
+
+            Assert.IsTrue(threwException);
+        }
+
+        [TestMethod]
+        public void TestSendMessageUnauthorized()
+        {
+            var client = new Client("abc123ThisIsNotValid");
+
+            var threwException = false;
+            try
+            {
+                client.SendMessage(new SendMessageRequest());
+            }
+            catch (SendMessageException e)
+            {
+                threwException = true;
+                Assert.AreEqual(401, e.StatusCode);
+                Assert.AreEqual(SendMessageResponseStatus.Unauthorized, e.SendMessageResponse.Status);
+            }
+
+            Assert.IsTrue(threwException);
+        }
+
+        [TestMethod]
+        public void TestSendMessagePreconditionFailed()
+        {
+            var client = new Client(ApiKey);
+
+            var threwException = false;
+            try
+            {
+                client.SendMessage(new SendMessageRequest()
+                    {
+                        Template = "some-unknown-template-xxxxxxxxxxxxxx"
+                    });
+            }
+            catch (SendMessageException e)
+            {
+                threwException = true;
+                Assert.AreEqual(412, e.StatusCode);
+                Assert.AreEqual(SendMessageResponseStatus.PreconditionFailed, e.SendMessageResponse.Status);
+            }
+
+            Assert.IsTrue(threwException);
+        }
+
+        [TestMethod]
+        public void TestSendMessageSuccess()
         {
             var client = new Client(ApiKey);
 
             var response = client.SendMessage(new SendMessageRequest()
                 {
+                    Uid = Guid.NewGuid().ToString(),
                     Recipient = "test@null.postageapp.com",
                     RecipientOverride = RecipientOverride,
                     Text = "This is my text content"
@@ -72,6 +159,7 @@ namespace Tests
 
             var response = client.SendMessage(new SendMessageRequest()
             {
+                Uid = Guid.NewGuid().ToString(),
                 Recipient = "test@null.postageapp.com",
                 RecipientOverride = RecipientOverride,
                 Headers = headers,
@@ -88,6 +176,7 @@ namespace Tests
 
             var response = client.SendMessage(new SendMessageRequest()
             {
+                Uid = Guid.NewGuid().ToString(),
                 Subject = "Html body",
                 Recipient = "test@null.postageapp.com",
                 RecipientOverride = RecipientOverride,
@@ -105,6 +194,7 @@ namespace Tests
 
             var response = client.SendMessage(new SendMessageRequest()
             {
+                Uid = Guid.NewGuid().ToString(),
                 Subject = "Has attachment",
                 Recipient = "test@null.postageapp.com",
                 RecipientOverride = RecipientOverride,

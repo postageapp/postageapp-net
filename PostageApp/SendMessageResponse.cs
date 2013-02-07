@@ -1,19 +1,35 @@
 ﻿using System;
+using System.Net;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace PostageApp
 {
     public enum SendMessageResponseStatus
     {
+        Unknown,
         Ok,
         BadRequest,
         NotFound,
         InvalidJson,
         Unauthorized,
         CallError,
-        PreconditionFailed,
-        Unknown
+        PreconditionFailed
     };
+
+    public class SendMessageException : Exception
+    {
+        public int StatusCode { get; set; }
+        public SendMessageResponse SendMessageResponse { get; set; }
+        public WebException WebException { get; set; }
+
+        public SendMessageException(WebException webException)
+        {
+            WebException = webException;
+            StatusCode = (int) ((HttpWebResponse) webException.Response).StatusCode;
+            SendMessageResponse = new SendMessageResponse(webException.Response);
+        }
+    }
 
     public class SendMessageResponse
     {
@@ -25,6 +41,23 @@ namespace PostageApp
         public SendMessageResponse(string json)
         {
             ParseJson(json);
+        }
+
+        public SendMessageResponse(WebResponse response)
+        {
+            var dataStream = response.GetResponseStream();
+            if (dataStream == null)
+                throw new Exception("Unexpected null response stream");
+
+            var reader = new StreamReader(dataStream);
+            var responseFromServer = reader.ReadToEnd();
+
+            reader.Close();
+            dataStream.Close();
+            response.Close();
+
+            if (response.ContentType.Equals("application/json"))
+                ParseJson(responseFromServer);
         }
 
         private SendMessageResponseStatus ParseStatus(string status)

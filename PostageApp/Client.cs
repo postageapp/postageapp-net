@@ -1,15 +1,20 @@
-﻿using System;
-using System.IO;
-using System.Net;
+﻿using System.Net;
 using System.Text;
 
 namespace PostageApp
 {
     public class Client
-    {     
-        private const string BaseUri = "https://api.postageapp.com/v.1.0/";
+    {
+        private const string DefaultUri = "https://api.postageapp.com/v.1.0/";
 
         private string ApiKey { get; set; }
+
+        private string _baseUri;
+        public string BaseUri
+        {
+            get { return _baseUri ?? DefaultUri; }
+            set { _baseUri = value; }
+        }
 
         public Client(string apiKey)
         {
@@ -18,13 +23,21 @@ namespace PostageApp
 
         public SendMessageResponse SendMessage(SendMessageRequest sendMessageRequest)
         {
-            const string url = BaseUri + "send_message.json";
+            string url = BaseUri + "send_message.json";
             var postData = sendMessageRequest.ToJson(ApiKey);
-            var json = JsonPost(url, postData);
-            return new SendMessageResponse(json);
+            var request = JsonPostRequest(url, postData);
+
+            try
+            {
+                return new SendMessageResponse(request.GetResponse());
+            }
+            catch (WebException e)
+            {
+                throw new SendMessageException(e);
+            }
         }
 
-        private static string JsonPost(string url, string postData)
+        private static WebRequest JsonPostRequest(string url, string postData)
         {
             var byteArray = Encoding.UTF8.GetBytes(postData);
 
@@ -37,21 +50,7 @@ namespace PostageApp
             dataStream.Write(byteArray, 0, byteArray.Length);
             dataStream.Close();
 
-            var response = request.GetResponse();
-            dataStream = response.GetResponseStream();
-            if (dataStream == null)
-            {
-                throw new Exception("Unexpected null response stream");
-            }
-
-            var reader = new StreamReader(dataStream);
-            var responseFromServer = reader.ReadToEnd();
-
-            reader.Close();
-            dataStream.Close();
-            response.Close();
-
-            return responseFromServer;
+            return request;
         }
     }
 }
