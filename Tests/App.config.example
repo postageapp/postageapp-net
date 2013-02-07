@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
   <appSettings>
-    <add key="apiKey" value="8999999"/>
+    <add key="apiKey" value="YOUR_API_KEY_HERE"/>
   </appSettings>
 </configuration>

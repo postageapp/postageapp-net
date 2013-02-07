@@ -4,3 +4,6 @@ Tests/obj
 Tests/bin
 PostageApp/obj
 *.suo
+Tests/App.config
+Tests/bin/*
+Tests/obj/*

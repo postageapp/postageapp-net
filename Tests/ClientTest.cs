@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Configuration;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PostageApp;
 
 namespace Tests
@@ -9,7 +10,7 @@ namespace Tests
         [TestMethod]
         public void TestSendMessage()
         {
-            var client = new Client("abc123");
+            var client = new Client(ConfigurationManager.AppSettings["apiKey"]);
 
             var request = new SendMessageRequest();
             client.SendMessage(request);
