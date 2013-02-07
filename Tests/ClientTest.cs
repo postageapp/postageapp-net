@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PostageApp;
+using Tests.Extensions;
 
 namespace Tests
 {
@@ -107,7 +108,11 @@ namespace Tests
                 Subject = "Has attachment",
                 Recipient = "test@null.postageapp.com",
                 RecipientOverride = RecipientOverride,
-                Text = "This email should have an attachment"
+                Text = "This email should have an attachment",
+                Attachments = new Attachment[]
+                    {
+                        new Attachment("file contents!\n\n".ToStream(), "readme.txt", "text/plain")
+                    }
             });
 
             Assert.AreEqual(SendMessageResponseStatus.Ok, response.Status);
