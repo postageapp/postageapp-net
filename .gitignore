@@ -1,0 +1,5 @@
+PostageApp/bin/
+*.user
+Tests/obj
+Tests/bin
+PostageApp/obj

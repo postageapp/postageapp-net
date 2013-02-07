@@ -55,9 +55,7 @@ namespace PostageApp.DTO
             var root = new JObject {{"api_key", new JValue(apiKey)}};
 
             if (Uid != null)
-            {
                 root.Add(new JProperty("uid", Uid));
-            }
 
             if (Content.Html != null || Content.Text != null)
             {
@@ -83,6 +81,41 @@ namespace PostageApp.DTO
 
                     foreach (var k in r.Variables.Keys)
                         variables.Add(new JProperty(k, r.Variables[k]));
+                }
+            }
+
+            if (Template != null)
+                arguments.Add(new JProperty("template", Template));
+
+            if (Variables.Count > 0)
+            {                
+                var variables = new JObject();
+                arguments.Add(new JProperty("variables", variables));
+
+                foreach (var k in Variables.Keys)
+                    variables.Add(new JProperty(k, Variables[k]));                
+            }
+
+            if (Headers.Count > 0)
+            {
+                var headers = new JObject();
+                arguments.Add(new JProperty("headers", headers));
+
+                foreach (var k in Headers.Keys)
+                    headers.Add(new JProperty(k, Headers[k]));
+            }
+
+            if (Attachments.Count > 0)
+            {
+                var attachments = new JObject();
+                arguments.Add(new JProperty("attachments", attachments));
+
+                foreach (var a in Attachments)
+                {
+                    var attachment = new JObject();
+                    attachments.Add(new JProperty(a.Filename, attachment));
+                    attachment.Add(new JProperty("content_type", a.ContentType));
+                    attachment.Add(new JProperty("content", a.Content));
                 }
             }
 

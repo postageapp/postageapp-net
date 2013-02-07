@@ -56,25 +56,23 @@ namespace Tests.DTO
         [TestMethod]
         public void TestJsonSerializationIncludesRecipients()
         {
-
-            var recipients = new List<Recipient>();
-
-            recipients.Add(new Recipient("test@null.postageapp.com")
+            var recipients = new List<Recipient>
                 {
-                    Variables = new Dictionary<string, string>()
+                    new Recipient("test@null.postageapp.com")
                         {
-                            {"actor", "Steve Gutenberg"}
-                        }
-                });
-
-            recipients.Add(new Recipient("test2@null.postageapp.com")
-            {
-                Variables = new Dictionary<string, string>()
+                            Variables = new Dictionary<string, string>()
+                                {
+                                    {"actor", "Steve Gutenberg"}
+                                }
+                        },
+                    new Recipient("test2@null.postageapp.com")
                         {
-                            {"actor", "Steve Martin"}
+                            Variables = new Dictionary<string, string>()
+                                {
+                                    {"actor", "Steve Martin"}
+                                }
                         }
-            });
-
+                };
 
             var r = new SendMessageRequest()
                 {
@@ -88,5 +86,76 @@ namespace Tests.DTO
             Assert.AreEqual("Steve Martin", o["arguments"]["recipients"]["test2@null.postageapp.com"]["actor"]);
         }
 
+        [TestMethod]
+        public void TestJsonSerializationIncludesTemplate()
+        {
+            const string slug = "some-template-slug";
+            var r = new SendMessageRequest() { Template = slug };
+
+            var json = r.ToJson(ApiKey);
+            var o = JObject.Parse(json);
+
+            Assert.AreEqual(slug, o["arguments"]["template"]);
+        }
+
+        [TestMethod]
+        public void TestJsonSerializationIncludesVariables()
+        {
+            var r = new SendMessageRequest() { 
+                Variables = new Dictionary<string, string>()
+                {
+                    { "movie", "Pee Wee's Big Adventure" },
+                    { "actor", "Meryl Streep" }
+                }
+            };
+
+            var json = r.ToJson(ApiKey);
+            var o = JObject.Parse(json);
+
+            Assert.AreEqual("Meryl Streep", o["arguments"]["variables"]["actor"]);
+            Assert.AreEqual("Pee Wee's Big Adventure", o["arguments"]["variables"]["movie"]);
+        }
+
+        [TestMethod]
+        public void TestJsonSerializationIncludesHeaders()
+        {
+            var r = new SendMessageRequest()
+            {
+                Headers = new Dictionary<string, string>()
+                {
+                    { "Subject", "Hello friend!"},
+                    { "X-Accept-Language", "en-us, en" }
+                }
+            };
+
+            var json = r.ToJson(ApiKey);
+            var o = JObject.Parse(json);
+
+            Assert.AreEqual("Hello friend!", o["arguments"]["headers"]["Subject"]);
+            Assert.AreEqual("en-us, en", o["arguments"]["headers"]["X-Accept-Language"]);
+        }
+
+        [TestMethod]
+        public void TestJsonSerializationIncludesAttachments()
+        {
+            var r = new SendMessageRequest()
+                {
+                    Attachments = new List<Attachment>()
+                        {
+                            new Attachment()
+                                {
+                                    Content = "this is the content of my file. Wrong format!",
+                                    ContentType = "text/plain",
+                                    Filename = "notes.txt"
+                                }
+                        }
+                };
+
+            var json = r.ToJson(ApiKey);
+            var o = JObject.Parse(json);
+
+            Assert.AreEqual("text/plain", o["arguments"]["attachments"]["notes.txt"]["content_type"]);
+            Assert.AreEqual("this is the content of my file. Wrong format!", o["arguments"]["attachments"]["notes.txt"]["content"]);
+        }
     }
 }
