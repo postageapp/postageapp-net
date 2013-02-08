@@ -109,9 +109,9 @@ error message and status code parsed from the response.
 
 Common exceptions:
 
-**400** - *Bad Request*: You have not provided enough information to send an email.  
-**401** - *Unauthorized*: Invalid API key.
-**412** - *Precondition Failed*: Some part of the request is invalid. Incorrect template slug? Invalid email address?
+* **400** - *Bad Request*: You have not provided enough information to send an email.
+* **401** - *Unauthorized*: Invalid API key.
+* **412** - *Precondition Failed*: Some part of the request is invalid. Incorrect template slug? Invalid email address?
 
 ## Building the Nuget package
 
