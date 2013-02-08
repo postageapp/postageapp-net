@@ -38,9 +38,6 @@ The following is a the absolute minimum required to send an email.
 
 Setting the `RecipientOverride` property allows you to safely redirect all outgoing email to your own address while in development mode.
 
-*Note - in these examples I am using the new object property initialization features of C# for berevity. 
-The above can just as easily be written out in long-form, as in the example below.*
-
 ## Passing variables to templates
 
 The real power of PostageApp kicks in when you start using templates. Templates can be configured in your PostageApp project dashboard. 
@@ -66,10 +63,7 @@ Once you have created a template that you want to use, specify its unique `slug`
 Emails aren't restricted to just one recipient. Instead of setting the `Recipient` property, set the `Recipients` property
 to a list of `Recipient` objects, each with its own set of variables.
 
-    var sendMessageRequest = new SendMessageRequest()
-        {
-            Template = "YOUR_TEMPLATE_SLUG"
-        };
+	var sendMessageRequest = new SendMessageRequest();
 
     sendMessageRequest.Recipients.Add(new Recipient("Alan Smithee <alan.smithee@gmail.com>")
         {
@@ -110,7 +104,7 @@ You are free to add any necessary email headers using this method.
 
 ## Handling exceptions
 
-An attempt is made to catch all internal `WebException`s and re-throw them as `SendMessageException`s, with the servers
+An attempt is made to catch all internal `WebException` and re-throw them as `SendMessageException`, with the servers
 error message and status code parsed from the response.
 
 Common exceptions:
