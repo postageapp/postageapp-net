@@ -10,3 +10,5 @@ Tests/obj/*
 PostageApp/obj/Debug/PostageApp.csproj.FileListAbsolute.txt
 Tests/bin/
 PostageApp/obj/
+*.nupkg
+*.zip
