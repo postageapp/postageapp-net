@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>PostageApp</id>
+    <version>$version$</version>
+    <authors>Derek Watson</authors>
+    <owners>Derek Watson</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>http://github.com/derek-watson/postageapp-net</projectUrl>
+    <iconUrl>http://postageapp.com/logos/postageapp-32px.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>PostageApp API client library for .NET 3.5+</description>
+    <releaseNotes>Initial release supporting the send_message method and all of its features.</releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <tags>postageapp send email delivery template background api smtp client</tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+</package>
