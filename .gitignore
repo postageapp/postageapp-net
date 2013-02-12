@@ -1,12 +1,6 @@
-PostageApp/bin/
 *.user
-Tests/obj
-Tests/bin
-PostageApp/obj
+*/obj/*
+*/bin/*
 *.suo
-Tests/App.config
-Tests/bin/*
-Tests/obj/*
+TWG.PostageApp.Net45.Tests/App.config
 PostageApp/obj/Debug/PostageApp.csproj.FileListAbsolute.txt
-Tests/bin/
-PostageApp/obj/

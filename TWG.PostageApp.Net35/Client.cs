@@ -1,7 +1,11 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using PostageApp;
 
-namespace PostageApp
+namespace TWG.PostageApp
 {
     public class Client
     {
@@ -25,10 +29,9 @@ namespace PostageApp
         {
             string url = BaseUri + "send_message.json";
             var postData = sendMessageRequest.ToJson(ApiKey);
-            var request = JsonPostRequest(url, postData);
-
             try
             {
+                var request = JsonPostRequest(url, postData);
                 return new SendMessageResponse(request.GetResponse());
             }
             catch (WebException e)
@@ -51,6 +54,6 @@ namespace PostageApp
             dataStream.Close();
 
             return request;
-        }
+        }   
     }
 }

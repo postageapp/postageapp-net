@@ -1,9 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostageApp", "PostageApp\PostageApp.csproj", "{358100A5-1A43-4D50-88C5-08A4C57626DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net35", "TWG.PostageApp.Net35\TWG.PostageApp.Net35.csproj", "{D78C7E31-E76B-43E3-9D5E-FDE2B8A44272}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{3A9FD246-0032-43CE-AFEC-D6DCD170422C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net45.Tests", "TWG.PostageApp.Net45.Tests\TWG.PostageApp.Net45.Tests.csproj", "{DA7D66BE-42C6-4B6D-B11C-8E0AA69169B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net45", "TWG.PostageApp.Net45\TWG.PostageApp.Net45.csproj", "{52AE9C82-E2C1-4978-8136-B49081214FA6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{DE19856C-B524-4D8C-8CED-B69A96127EB5}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,14 +18,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{358100A5-1A43-4D50-88C5-08A4C57626DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{358100A5-1A43-4D50-88C5-08A4C57626DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{358100A5-1A43-4D50-88C5-08A4C57626DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{358100A5-1A43-4D50-88C5-08A4C57626DA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3A9FD246-0032-43CE-AFEC-D6DCD170422C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3A9FD246-0032-43CE-AFEC-D6DCD170422C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3A9FD246-0032-43CE-AFEC-D6DCD170422C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3A9FD246-0032-43CE-AFEC-D6DCD170422C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D78C7E31-E76B-43E3-9D5E-FDE2B8A44272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D78C7E31-E76B-43E3-9D5E-FDE2B8A44272}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D78C7E31-E76B-43E3-9D5E-FDE2B8A44272}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D78C7E31-E76B-43E3-9D5E-FDE2B8A44272}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA7D66BE-42C6-4B6D-B11C-8E0AA69169B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA7D66BE-42C6-4B6D-B11C-8E0AA69169B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA7D66BE-42C6-4B6D-B11C-8E0AA69169B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA7D66BE-42C6-4B6D-B11C-8E0AA69169B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52AE9C82-E2C1-4978-8136-B49081214FA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52AE9C82-E2C1-4978-8136-B49081214FA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52AE9C82-E2C1-4978-8136-B49081214FA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52AE9C82-E2C1-4978-8136-B49081214FA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
