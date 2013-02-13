@@ -1,4 +1,4 @@
-﻿namespace TWG.PostageApp
+﻿namespace TWG.PostageApp.Common
 {
     /// <summary>
     /// Represents server response container.

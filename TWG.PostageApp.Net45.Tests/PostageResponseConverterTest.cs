@@ -1,7 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using TWG.PostageApp.Common;
 using TWG.PostageApp.Converters;
+using TWG.PostageApp.Message;
 
 namespace TWG.PostageApp.Tests
 {

@@ -2,6 +2,7 @@
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using TWG.PostageApp.Message;
 
 namespace TWG.PostageApp.Converters
 {
@@ -30,7 +31,7 @@ namespace TWG.PostageApp.Converters
         /// <param name="writer">The <see cref="T:Newtonsoft.Json.JsonWriter"/> to write to.</param><param name="value">The value.</param><param name="serializer">The calling serializer.</param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var message = (Message)value;
+            var message = (Message.Message)value;
 
             var root = new JObject { { "api_key", new JValue(ApiKey) } };
 
@@ -165,7 +166,7 @@ namespace TWG.PostageApp.Converters
         /// </returns>
         public override bool CanConvert(Type objectType)
         {
-            if (objectType == typeof(Message))
+            if (objectType == typeof(Message.Message))
             {
                 return true;
             }

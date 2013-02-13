@@ -1,7 +1,6 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
-namespace TWG.PostageApp
+namespace TWG.PostageApp.Common
 {
     /// <summary>
     /// Represents postageApp server response.

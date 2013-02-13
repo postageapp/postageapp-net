@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using TWG.PostageApp.Converters;
+using TWG.PostageApp.Message;
 
 namespace TWG.PostageApp.Tests
 {
@@ -42,7 +43,7 @@ namespace TWG.PostageApp.Tests
         [TestMethod]
         public void TestJsonSerializationIncludesApiKey()
         {
-            var message = new Message();
+            var message = new Message.Message();
 
             var messageJson = JsonConvert.SerializeObject(message, _requestSerializerSettings);
             Assert.IsTrue(messageJson.Contains(string.Format("\"api_key\":\"{0}\"", API_KEY)));
@@ -55,7 +56,7 @@ namespace TWG.PostageApp.Tests
         public void TestJsonSerializationIncludesText()
         {
             var text = "my content";
-            var message = new Message { Text = text };
+            var message = new Message.Message { Text = text };
 
             var messageJson = JsonConvert.SerializeObject(message, _requestSerializerSettings);
 
@@ -69,7 +70,7 @@ namespace TWG.PostageApp.Tests
         public void TestJsonSerializationIncludesHtml()
         {
             var text = "<h1>my content</h1>";
-            var message = new Message { Html = text };
+            var message = new Message.Message { Html = text };
 
             var messageJson = JsonConvert.SerializeObject(message, _requestSerializerSettings);
 
@@ -83,7 +84,7 @@ namespace TWG.PostageApp.Tests
         public void TestJsonSerializationIncludesRecipient()
         {
             var recipient = "test@null.postageapp.com";
-            var message = new Message { Recipient = new Recipient(recipient) };
+            var message = new Message.Message { Recipient = new Recipient(recipient) };
 
             var messageJson = JsonConvert.SerializeObject(message, _requestSerializerSettings);
 
@@ -104,7 +105,7 @@ namespace TWG.PostageApp.Tests
             var recipient2 = new Recipient(email2);
             recipient2.Variables.Add("actor", "Steve Martin");
 
-            var message = new Message();
+            var message = new Message.Message();
             message.Recipients.Add(recipient1);
             message.Recipients.Add(recipient2);
             var messageJson = JsonConvert.SerializeObject(message, _requestSerializerSettings);
@@ -120,7 +121,7 @@ namespace TWG.PostageApp.Tests
         public void TestJsonSerializationIncludesRecipientOverride()
         {
             var recipientOverride = "test@null.postageapp.com";
-            var message = new Message { RecipientOverride = recipientOverride };
+            var message = new Message.Message { RecipientOverride = recipientOverride };
 
             var messageJson = JsonConvert.SerializeObject(message, _requestSerializerSettings);
 
@@ -134,7 +135,7 @@ namespace TWG.PostageApp.Tests
         public void TestJsonSerializationIncludesTemplate()
         {
             var slug = "some-template-slug";
-            var message = new Message { Template = slug };
+            var message = new Message.Message { Template = slug };
 
             var messageJson = JsonConvert.SerializeObject(message, _requestSerializerSettings);
 
@@ -147,7 +148,7 @@ namespace TWG.PostageApp.Tests
         [TestMethod]
         public void TestJsonSerializationIncludesVariables()
         {
-            var message = new Message();
+            var message = new Message.Message();
             message.Variables.Add("movie", "Pee Wee's Big Adventure");
             message.Variables.Add("actor", "Meryl Streep");
 
@@ -164,7 +165,7 @@ namespace TWG.PostageApp.Tests
         public void TestJsonSerializationIncludesSubjectHeader()
         {
             var text = "my content";
-            var message = new Message { Subject = text };
+            var message = new Message.Message { Subject = text };
 
             var messageJson = JsonConvert.SerializeObject(message, _requestSerializerSettings);
 
@@ -178,7 +179,7 @@ namespace TWG.PostageApp.Tests
         public void TestJsonSerializationIncludesReplyToHeader()
         {
             var replyTo = "test@null.postageapp.com";
-            var message = new Message { ReplyTo = replyTo };
+            var message = new Message.Message { ReplyTo = replyTo };
 
             var messageJson = JsonConvert.SerializeObject(message, _requestSerializerSettings);
 
@@ -191,7 +192,7 @@ namespace TWG.PostageApp.Tests
         [TestMethod]
         public void TestJsonSerializationIncludesHeaders()
         {
-            var message = new Message();
+            var message = new Message.Message();
             message.Headers.Add("Subject", "Hello friend!");
             message.Headers.Add("X-Accept-Language", "en-us, en");
 
@@ -210,7 +211,7 @@ namespace TWG.PostageApp.Tests
             
             var contentBytes = Encoding.UTF8.GetBytes(fileContent);
             var stream = new MemoryStream(contentBytes);
-            var message = new Message();
+            var message = new Message.Message();
             message.Attachments.Add(new Attachment(stream, "notes.txt", "text/plain"));
 
             var messageJson = JsonConvert.SerializeObject(message, _requestSerializerSettings);

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace TWG.PostageApp
+namespace TWG.PostageApp.Message
 {
     /// <summary>
     /// Represents message attachment.

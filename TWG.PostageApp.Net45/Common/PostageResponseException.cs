@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TWG.PostageApp
+namespace TWG.PostageApp.Common
 {
     /// <summary>
     /// Represents postage response exception.

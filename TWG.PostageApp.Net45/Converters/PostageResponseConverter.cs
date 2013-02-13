@@ -1,6 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using TWG.PostageApp.Common;
 
 namespace TWG.PostageApp.Converters
 {

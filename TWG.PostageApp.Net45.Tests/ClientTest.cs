@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TWG.PostageApp.Common;
+using TWG.PostageApp.Message;
+using TWG.PostageApp.Transmissions;
 
 namespace TWG.PostageApp.Tests
 {
@@ -14,6 +19,8 @@ namespace TWG.PostageApp.Tests
     [TestClass]
     public class ClientTest
     {
+        #region Common
+
         /// <summary>
         /// Gets recipient override email.
         /// </summary>
@@ -30,6 +37,10 @@ namespace TWG.PostageApp.Tests
             get { return ConfigurationManager.AppSettings["apiKey"]; }
         }
 
+        #endregion
+
+        #region Send Message
+
         /// <summary>
         /// Test send message invalid domain.
         /// </summary>
@@ -41,7 +52,7 @@ namespace TWG.PostageApp.Tests
             var threwException = false;
             try
             {
-                var message = new Message
+                var message = new Message.Message
                 {
                     Uid = Guid.NewGuid().ToString(),
                     Recipient = new Recipient("test@null.postageapp.com"),
@@ -74,7 +85,7 @@ namespace TWG.PostageApp.Tests
             var threwException = false;
             try
             {
-                var message = new Message
+                var message = new Message.Message
                 {
                     Uid = Guid.NewGuid().ToString(),
                     Recipient = new Recipient("test@null.postageapp.com"),
@@ -104,7 +115,7 @@ namespace TWG.PostageApp.Tests
             var threwException = false;
             try
             {
-                client.SendMessage(new Message());
+                client.SendMessage(new Message.Message());
             }
             catch (PostageResponseException<MessageResponse> exception)
             {
@@ -128,7 +139,7 @@ namespace TWG.PostageApp.Tests
             var threwException = false;
             try
             {
-                await client.SendMessageAsync(new Message());
+                await client.SendMessageAsync(new Message.Message());
             }
             catch (PostageResponseException<MessageResponse> exception)
             {
@@ -147,7 +158,7 @@ namespace TWG.PostageApp.Tests
         {
             var client = new Client(ApiKey);
 
-            var message = new Message
+            var message = new Message.Message
             {
                 Uid = Guid.NewGuid().ToString(),
                 Recipient = new Recipient("test@null.postageapp.com"),
@@ -172,7 +183,7 @@ namespace TWG.PostageApp.Tests
         {
             var client = new Client(ApiKey);
 
-            var message = new Message
+            var message = new Message.Message
             {
                 Uid = Guid.NewGuid().ToString(),
                 Recipient = new Recipient("test@null.postageapp.com"),
@@ -199,7 +210,7 @@ namespace TWG.PostageApp.Tests
             var threwException = false;
             try
             {
-                client.SendMessage(new Message());
+                client.SendMessage(new Message.Message());
             }
             catch (PostageResponseException<MessageResponse> exception)
             {
@@ -225,7 +236,7 @@ namespace TWG.PostageApp.Tests
             var threwException = false;
             try
             {
-                await client.SendMessageAsync(new Message());
+                await client.SendMessageAsync(new Message.Message());
             }
             catch (PostageResponseException<MessageResponse> exception)
             {
@@ -247,7 +258,7 @@ namespace TWG.PostageApp.Tests
             var threwException = false;
             try
             {
-                client.SendMessage(new Message { Template = "some-unknown-template-xxxxxxxxxxxxxx" });
+                client.SendMessage(new Message.Message { Template = "some-unknown-template-xxxxxxxxxxxxxx" });
             }
             catch (PostageResponseException<MessageResponse> exception)
             {
@@ -272,7 +283,7 @@ namespace TWG.PostageApp.Tests
             var threwException = false;
             try
             {
-               await client.SendMessageAsync(new Message { Template = "some-unknown-template-xxxxxxxxxxxxxx" });
+                await client.SendMessageAsync(new Message.Message { Template = "some-unknown-template-xxxxxxxxxxxxxx" });
             }
             catch (PostageResponseException<MessageResponse> exception)
             {
@@ -293,7 +304,7 @@ namespace TWG.PostageApp.Tests
 
             var client = new Client(ApiKey);
 
-            var responseContainer = client.SendMessage(new Message
+            var responseContainer = client.SendMessage(new Message.Message
                 {
                     Uid = uid,
                     Subject = "Specific Uid: " + uid,
@@ -319,7 +330,7 @@ namespace TWG.PostageApp.Tests
 
             var client = new Client(ApiKey);
 
-            var responseContainer = await client.SendMessageAsync(new Message
+            var responseContainer = await client.SendMessageAsync(new Message.Message
             {
                 Uid = uid,
                 Subject = "Specific Uid: " + uid,
@@ -339,7 +350,7 @@ namespace TWG.PostageApp.Tests
         public void TestSendMessageWithHeaders()
         {
             var client = new Client(ApiKey);
-            var message = new Message
+            var message = new Message.Message
                 {
                     Uid = Guid.NewGuid().ToString(),
                     Recipient = new Recipient("test@null.postageapp.com"),
@@ -365,13 +376,13 @@ namespace TWG.PostageApp.Tests
         public async Task TestSendMessageWithHeadersAsync()
         {
             var client = new Client(ApiKey);
-            var message = new Message
+            var message = new Message.Message
                 {
-                Uid = Guid.NewGuid().ToString(),
-                Recipient = new Recipient("test@null.postageapp.com"),
-                RecipientOverride = RecipientOverride,
-                Text = "This email should have a custom from name and subject line."
-            };
+                    Uid = Guid.NewGuid().ToString(),
+                    Recipient = new Recipient("test@null.postageapp.com"),
+                    RecipientOverride = RecipientOverride,
+                    Text = "This email should have a custom from name and subject line."
+                };
 
             message.Headers.Add("From", "test.robot@null.postageapp.com");
             message.Headers.Add("Subject", "This is a custom subject line");
@@ -389,15 +400,15 @@ namespace TWG.PostageApp.Tests
         {
             var client = new Client(ApiKey);
 
-            var responseContainer = client.SendMessage(new Message
+            var responseContainer = client.SendMessage(new Message.Message
                 {
-                Uid = Guid.NewGuid().ToString(),
-                Subject = "Html body",
-                Recipient = new Recipient("test@null.postageapp.com"),
-                RecipientOverride = RecipientOverride,
-                Text = "This email should have some html content.",
-                Html = "<h1>Title</h1><p>This is an <em>html email</em></p></h1>"
-            });
+                    Uid = Guid.NewGuid().ToString(),
+                    Subject = "Html body",
+                    Recipient = new Recipient("test@null.postageapp.com"),
+                    RecipientOverride = RecipientOverride,
+                    Text = "This email should have some html content.",
+                    Html = "<h1>Title</h1><p>This is an <em>html email</em></p></h1>"
+                });
 
             Assert.AreEqual(ResponseStatus.Ok, responseContainer.Response.Status);
         }
@@ -413,15 +424,15 @@ namespace TWG.PostageApp.Tests
         {
             var client = new Client(ApiKey);
 
-            var responseContainer = await client.SendMessageAsync(new Message
+            var responseContainer = await client.SendMessageAsync(new Message.Message
                 {
-                Uid = Guid.NewGuid().ToString(),
-                Subject = "Html body",
-                Recipient = new Recipient("test@null.postageapp.com"),
-                RecipientOverride = RecipientOverride,
-                Text = "This email should have some html content.",
-                Html = "<h1>Title</h1><p>This is an <em>html email</em></p></h1>"
-            });
+                    Uid = Guid.NewGuid().ToString(),
+                    Subject = "Html body",
+                    Recipient = new Recipient("test@null.postageapp.com"),
+                    RecipientOverride = RecipientOverride,
+                    Text = "This email should have some html content.",
+                    Html = "<h1>Title</h1><p>This is an <em>html email</em></p></h1>"
+                });
 
             Assert.AreEqual(ResponseStatus.Ok, responseContainer.Response.Status);
         }
@@ -439,7 +450,7 @@ namespace TWG.PostageApp.Tests
             var contentBytes = Encoding.UTF8.GetBytes(fileContent);
             var stream = new MemoryStream(contentBytes);
 
-            var message = new Message
+            var message = new Message.Message
                 {
                     Uid = Guid.NewGuid().ToString(),
                     Subject = "Has attachment",
@@ -471,7 +482,7 @@ namespace TWG.PostageApp.Tests
             var contentBytes = Encoding.UTF8.GetBytes(fileContent);
             var stream = new MemoryStream(contentBytes);
 
-            var message = new Message
+            var message = new Message.Message
             {
                 Uid = Guid.NewGuid().ToString(),
                 Subject = "Has attachment",
@@ -486,5 +497,379 @@ namespace TWG.PostageApp.Tests
 
             Assert.AreEqual(ResponseStatus.Ok, responseContainer.Response.Status);
         }
+
+        #endregion
+
+        #region Get Messages
+
+        /// <summary>
+        /// Test get messages success.
+        /// </summary>
+        [TestMethod]
+        public void TestGetMessagesSuccess()
+        {
+            var client = new Client(ApiKey);
+
+            var responseContainer = client.GetMessages();
+
+            Assert.AreEqual(ResponseStatus.Ok, responseContainer.Response.Status);
+            Assert.IsNotNull(responseContainer.Data);
+        }
+
+        /// <summary>
+        /// Test send message unauthorized.
+        /// </summary>
+        [TestMethod]
+        public void TestGetMessagesUnauthorized()
+        {
+            var client = new Client("abc123ThisIsNotValid");
+            var threwException = false;
+            try
+            {
+                client.GetMessages();
+            }
+            catch (PostageResponseException<Dictionary<string, MessageInfo>> exception)
+            {
+                threwException = true;
+                Assert.AreEqual(401, (int)((HttpWebResponse)((WebException)exception.InnerException).Response).StatusCode);
+                Assert.AreEqual(ResponseStatus.Unauthorized, exception.ResponseContainer.Response.Status);
+            }
+
+            Assert.IsTrue(threwException);
+        }
+
+        /// <summary>
+        /// Test send message unauthorized async.
+        /// </summary>
+        /// <returns>
+        /// <see cref="Task"/> of operation.
+        /// </returns>
+        [TestMethod]
+        public async Task TestGetMessagesUnauthorizedAsync()
+        {
+            var client = new Client("abc123ThisIsNotValid");
+
+            var threwException = false;
+            try
+            {
+                await client.GetMessagesAsync();
+            }
+            catch (PostageResponseException<Dictionary<string, MessageInfo>> exception)
+            {
+                threwException = true;
+                Assert.AreEqual(ResponseStatus.Unauthorized, exception.ResponseContainer.Response.Status);
+            }
+
+            Assert.IsTrue(threwException);
+        }
+
+        #endregion
+
+        #region Get Project Info
+
+        /// <summary>
+        /// Test get project success.
+        /// </summary>
+        [TestMethod]
+        public void TestGetProjectInfoSuccess()
+        {
+            var client = new Client(ApiKey);
+
+            var responseContainer = client.GetProjectInfo();
+
+            Assert.AreEqual(ResponseStatus.Ok, responseContainer.Response.Status);
+            Assert.IsNotNull(responseContainer.Data);
+            Assert.IsNotNull(responseContainer.Data.Url);
+        }
+
+        /// <summary>
+        /// Test get project success.
+        /// </summary>
+        /// <returns>
+        /// <see cref="Task"/> of operation.
+        /// </returns>
+        [TestMethod]
+        public async Task TestGetProjectInfoSuccessAsync()
+        {
+            var client = new Client(ApiKey);
+
+            var responseContainer = await client.GetProjectInfoAsync();
+
+            Assert.AreEqual(ResponseStatus.Ok, responseContainer.Response.Status);
+            Assert.IsNotNull(responseContainer.Data);
+            Assert.IsNotNull(responseContainer.Data.Url);
+        }
+
+        #endregion
+
+        #region Get Account Info
+
+        /// <summary>
+        /// Test get project success.
+        /// </summary>
+        [TestMethod]
+        public void TestGetAccountInfoSuccess()
+        {
+            var client = new Client(ApiKey);
+
+            var responseContainer = client.GetAccountInfo();
+
+            Assert.AreEqual(ResponseStatus.Ok, responseContainer.Response.Status);
+            Assert.IsNotNull(responseContainer.Data);
+            Assert.IsNotNull(responseContainer.Data.Url);
+        }
+
+        /// <summary>
+        /// Test get project success.
+        /// </summary>
+        /// <returns>
+        /// <see cref="Task"/> of operation.
+        /// </returns>
+        [TestMethod]
+        public async Task TestGetAccountInfoSuccessAsync()
+        {
+            var client = new Client(ApiKey);
+
+            var responseContainer = await client.GetAccountInfoAsync();
+
+            Assert.AreEqual(ResponseStatus.Ok, responseContainer.Response.Status);
+            Assert.IsNotNull(responseContainer.Data);
+            Assert.IsNotNull(responseContainer.Data.Url);
+        }
+
+        #endregion
+
+        #region Get Message Receipt
+
+        /// <summary>
+        /// Test get message receipt success.
+        /// </summary>
+        [TestMethod]
+        public void TestGetMessageReceiptSuccess()
+        {
+            var client = new Client(ApiKey);
+
+            var message = new Message.Message
+            {
+                Uid = Guid.NewGuid().ToString(),
+                Recipient = new Recipient("test@null.postageapp.com"),
+                RecipientOverride = RecipientOverride,
+                Text = "This is my text content"
+            };
+
+            var sendResponseContainer = client.SendMessage(message);
+
+            var responseContainer = client.GetMessageReceipt(sendResponseContainer.Response.Uid);
+
+            Assert.AreEqual(ResponseStatus.Ok, responseContainer.Response.Status);
+            Assert.AreEqual(sendResponseContainer.Data.Id, responseContainer.Data.Id);
+        }
+
+        /// <summary>
+        /// Test get message receipt success async.
+        /// </summary>
+        /// <returns>
+        /// <see cref="Task"/> of operation.
+        /// </returns>
+        [TestMethod]
+        public async Task TestGetMessageReceiptSuccessAsync()
+        {
+            var client = new Client(ApiKey);
+
+            var message = new Message.Message
+            {
+                Uid = Guid.NewGuid().ToString(),
+                Recipient = new Recipient("test@null.postageapp.com"),
+                RecipientOverride = RecipientOverride,
+                Text = "This is my text content"
+            };
+
+            var sendResponseContainer = await client.SendMessageAsync(message);
+
+            var responseContainer = await client.GetMessageReceiptAsync(sendResponseContainer.Response.Uid);
+
+            Assert.AreEqual(ResponseStatus.Ok, responseContainer.Response.Status);
+            Assert.AreEqual(sendResponseContainer.Data.Id, responseContainer.Data.Id);
+        }
+
+        /// <summary>
+        /// Test not existing message.
+        /// </summary>
+        [TestMethod]
+        public void TestGetMessageReceiptNotFound()
+        {
+            var client = new Client(ApiKey);
+
+            var threwException = false;
+            try
+            {
+                client.GetMessageReceipt("strange UID");
+            }
+            catch (PostageResponseException<MessageResponse> exception)
+            {
+                threwException = true;
+                Assert.AreEqual(ResponseStatus.NotFound, exception.ResponseContainer.Response.Status);
+            }
+
+            Assert.IsTrue(threwException);
+        }
+
+        /// <summary>
+        /// Test not existing message async.
+        /// </summary>
+        /// <returns> Task. </returns>
+        [TestMethod]
+        public async Task TestGetMessageReceiptNotFoundAsync()
+        {
+            var client = new Client(ApiKey);
+
+            var threwException = false;
+            try
+            {
+               await client.GetMessageReceiptAsync("strange UID");
+            }
+            catch (PostageResponseException<MessageResponse> exception)
+            {
+                threwException = true;
+                Assert.AreEqual(ResponseStatus.NotFound, exception.ResponseContainer.Response.Status);
+            }
+
+            Assert.IsTrue(threwException);
+        }
+
+        #endregion
+
+        #region Get Metrics
+
+        /// <summary>
+        /// Test get message receipt success.
+        /// </summary>
+        [TestMethod]
+        public void TestGetMetricsSuccess()
+        {
+            var client = new Client(ApiKey);
+
+            var responseContainer = client.GetMetrics();
+
+            Assert.AreEqual(ResponseStatus.Ok, responseContainer.Response.Status);
+            Assert.IsNotNull(responseContainer.Data);
+            Assert.IsNotNull(responseContainer.Data.Date);
+            Assert.IsNotNull(responseContainer.Data.Hour);
+            Assert.IsNotNull(responseContainer.Data.Month);
+            Assert.IsNotNull(responseContainer.Data.Week);
+        }
+
+        /// <summary>
+        /// Test get message receipt success.
+        /// </summary>
+        /// <returns>
+        /// <see cref="Task"/> of operation.
+        /// </returns>
+        [TestMethod]
+        public async Task TestGetMetricsSuccessAsync()
+        {
+            var client = new Client(ApiKey);
+
+            var responseContainer = await client.GetMetricsAsync();
+
+            Assert.AreEqual(ResponseStatus.Ok, responseContainer.Response.Status);
+            Assert.IsNotNull(responseContainer.Data);
+            Assert.IsNotNull(responseContainer.Data.Date);
+            Assert.IsNotNull(responseContainer.Data.Hour);
+            Assert.IsNotNull(responseContainer.Data.Month);
+            Assert.IsNotNull(responseContainer.Data.Week);
+        }
+
+        #endregion
+
+        #region Get Message Transmissions
+
+        /// <summary>
+        /// Test get message transmissions success.
+        /// </summary>
+        [TestMethod]
+        public void TestGetMessageTransmissionsSuccess()
+        {
+            var client = new Client(ApiKey);
+
+            var messagesContainer = client.GetMessages();
+
+            var firstMessage = messagesContainer.Data.FirstOrDefault(pair => pair.Value.TotalTransmissionsCount > 1);
+
+            var responseContainer = client.GetMessageTransmissions(firstMessage.Key);
+
+            Assert.AreEqual(ResponseStatus.Ok, responseContainer.Response.Status);
+            Assert.IsNotNull(responseContainer.Data);
+        }
+
+        /// <summary>
+        /// Test get message transmissions success async.
+        /// </summary>
+        /// <returns>
+        /// <see cref="Task"/> of operation.
+        /// </returns>
+        [TestMethod]
+        public async Task TestGetMessageTransmissionsSuccessAsync()
+        {
+            var client = new Client(ApiKey);
+
+            var messagesContainer = await client.GetMessagesAsync();
+
+            var firstMessage = messagesContainer.Data.FirstOrDefault(pair => pair.Value.TotalTransmissionsCount > 1);
+
+            var responseContainer = await client.GetMessageTransmissionsAsync(firstMessage.Key);
+
+            Assert.AreEqual(ResponseStatus.Ok, responseContainer.Response.Status);
+            Assert.IsNotNull(responseContainer.Data);
+        }
+
+        /// <summary>
+        /// Test not existing message transmissions.
+        /// </summary>
+        [TestMethod]
+        public void TestGetMessageTransmissionsNotFound()
+        {
+            var client = new Client(ApiKey);
+
+            var threwException = false;
+            try
+            {
+                client.GetMessageTransmissions("strange UID");
+            }
+            catch (PostageResponseException<MessageTransmissions> exception)
+            {
+                threwException = true;
+                Assert.AreEqual(ResponseStatus.NotFound, exception.ResponseContainer.Response.Status);
+            }
+
+            Assert.IsTrue(threwException);
+        }
+
+        /// <summary>
+        /// Test not existing message transmissions async.
+        /// </summary>
+        /// <returns>
+        /// <see cref="Task"/> of operation.
+        /// </returns>
+        [TestMethod]
+        public async Task TestGetMessageTransmissionsNotFoundAsync()
+        {
+            var client = new Client(ApiKey);
+
+            var threwException = false;
+            try
+            {
+               await client.GetMessageTransmissionsAsync("strange UID");
+            }
+            catch (PostageResponseException<MessageTransmissions> exception)
+            {
+                threwException = true;
+                Assert.AreEqual(ResponseStatus.NotFound, exception.ResponseContainer.Response.Status);
+            }
+
+            Assert.IsTrue(threwException);
+        }
+
+        #endregion
     }
 }

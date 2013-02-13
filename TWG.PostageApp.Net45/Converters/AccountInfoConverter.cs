@@ -1,14 +1,13 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using TWG.PostageApp.Message;
 
 namespace TWG.PostageApp.Converters
 {
     /// <summary>
-    /// Represents message response JSON converter.
+    /// Represents account info JSON converter.
     /// </summary>
-    public class MessageResponseConverter : JsonConverter
+    public class AccountInfoConverter : JsonConverter
     {
         /// <summary>
         /// Writes the JSON representation of the object.
@@ -28,15 +27,8 @@ namespace TWG.PostageApp.Converters
         /// </returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            var json = JObject.Load(reader);
-            var message = json["message"];
-
-            var id = (uint)message["id"];
-            var url = (string)message["url"];
-
-            var messageResponce = new MessageResponse(id, url);
-
-            return messageResponce;
+            var dataJson = JObject.Load(reader);
+            return dataJson["account"].ToObject<AccountInfo>();
         }
 
         /// <summary>
@@ -48,7 +40,7 @@ namespace TWG.PostageApp.Converters
         /// </returns>
         public override bool CanConvert(Type objectType)
         {
-            if (objectType == typeof(MessageResponse))
+            if (objectType == typeof(AccountInfo))
             {
                 return true;
             }
