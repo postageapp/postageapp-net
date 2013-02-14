@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net35", "TWG.PostageApp.Net35\TWG.PostageApp.Net35.csproj", "{D78C7E31-E76B-43E3-9D5E-FDE2B8A44272}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net45.Tests", "TWG.PostageApp.Net45.Tests\TWG.PostageApp.Net45.Tests.csproj", "{DA7D66BE-42C6-4B6D-B11C-8E0AA69169B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net45", "TWG.PostageApp.Net45\TWG.PostageApp.Net45.csproj", "{52AE9C82-E2C1-4978-8136-B49081214FA6}"
@@ -13,16 +11,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net20", "TWG.PostageApp.Net20\TWG.PostageApp.Net20.csproj", "{54559E8C-C959-40FC-AAF0-D674C17ADEE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net20.Tests", "TWG.PostageApp.Net20.Tests\TWG.PostageApp.Net20.Tests.csproj", "{F8699CA3-BCA2-4E8A-BF4E-EE9C8352AE2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net45.Portable", "TWG.PostageApp.Net45.Portable\TWG.PostageApp.Net45.Portable.csproj", "{23C87832-8E46-463F-A489-92C5A987E905}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net45.Portable.Tests", "TWG.PostageApp.Net45.Portable.Tests\TWG.PostageApp.Net45.Portable.Tests.csproj", "{0786868E-821F-4591-83C5-A1CEFC18E460}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D78C7E31-E76B-43E3-9D5E-FDE2B8A44272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D78C7E31-E76B-43E3-9D5E-FDE2B8A44272}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D78C7E31-E76B-43E3-9D5E-FDE2B8A44272}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D78C7E31-E76B-43E3-9D5E-FDE2B8A44272}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DA7D66BE-42C6-4B6D-B11C-8E0AA69169B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DA7D66BE-42C6-4B6D-B11C-8E0AA69169B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA7D66BE-42C6-4B6D-B11C-8E0AA69169B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -31,6 +33,22 @@ Global
 		{52AE9C82-E2C1-4978-8136-B49081214FA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52AE9C82-E2C1-4978-8136-B49081214FA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52AE9C82-E2C1-4978-8136-B49081214FA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54559E8C-C959-40FC-AAF0-D674C17ADEE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54559E8C-C959-40FC-AAF0-D674C17ADEE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54559E8C-C959-40FC-AAF0-D674C17ADEE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54559E8C-C959-40FC-AAF0-D674C17ADEE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8699CA3-BCA2-4E8A-BF4E-EE9C8352AE2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8699CA3-BCA2-4E8A-BF4E-EE9C8352AE2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8699CA3-BCA2-4E8A-BF4E-EE9C8352AE2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8699CA3-BCA2-4E8A-BF4E-EE9C8352AE2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23C87832-8E46-463F-A489-92C5A987E905}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23C87832-8E46-463F-A489-92C5A987E905}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23C87832-8E46-463F-A489-92C5A987E905}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23C87832-8E46-463F-A489-92C5A987E905}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0786868E-821F-4591-83C5-A1CEFC18E460}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0786868E-821F-4591-83C5-A1CEFC18E460}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0786868E-821F-4591-83C5-A1CEFC18E460}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0786868E-821F-4591-83C5-A1CEFC18E460}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
