@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net45.Portab
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net45.Portable.Tests", "TWG.PostageApp.Net45.Portable.Tests\TWG.PostageApp.Net45.Portable.Tests.csproj", "{0786868E-821F-4591-83C5-A1CEFC18E460}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net45.WP8", "TWG.PostageApp.Net45.WP8\TWG.PostageApp.Net45.WP8.csproj", "{A83EA74A-E3AE-493A-BEF0-736214DA5874}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net45.WP8.Tests", "TWG.PostageApp.Net45.WP8.Tests\TWG.PostageApp.Net45.WP8.Tests.csproj", "{EA80303E-E54F-417F-A949-F88C2F6B68B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +53,14 @@ Global
 		{0786868E-821F-4591-83C5-A1CEFC18E460}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0786868E-821F-4591-83C5-A1CEFC18E460}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0786868E-821F-4591-83C5-A1CEFC18E460}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A83EA74A-E3AE-493A-BEF0-736214DA5874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A83EA74A-E3AE-493A-BEF0-736214DA5874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A83EA74A-E3AE-493A-BEF0-736214DA5874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A83EA74A-E3AE-493A-BEF0-736214DA5874}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA80303E-E54F-417F-A949-F88C2F6B68B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA80303E-E54F-417F-A949-F88C2F6B68B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA80303E-E54F-417F-A949-F88C2F6B68B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA80303E-E54F-417F-A949-F88C2F6B68B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
