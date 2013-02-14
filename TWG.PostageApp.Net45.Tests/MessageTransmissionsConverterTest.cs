@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using TWG.PostageApp.Converters;
 using TWG.PostageApp.Transmissions;
 
-namespace TWG.PostageApp.Tests
+namespace TWG.PostageApp.Net45.Tests
 {
     /// <summary>
     /// Represents message transmissions converter test.

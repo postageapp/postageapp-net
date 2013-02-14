@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using TWG.PostageApp.Converters;
 using TWG.PostageApp.Project;
 
-namespace TWG.PostageApp.Tests
+namespace TWG.PostageApp.Net45.Tests
 {
     /// <summary>
     /// Represents project info converter test.
