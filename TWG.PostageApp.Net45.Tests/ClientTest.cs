@@ -11,7 +11,7 @@ using TWG.PostageApp.Common;
 using TWG.PostageApp.Message;
 using TWG.PostageApp.Transmissions;
 
-namespace TWG.PostageApp.Tests
+namespace TWG.PostageApp.Net45.Tests
 {
     /// <summary>
     /// Represents Postage App tests.

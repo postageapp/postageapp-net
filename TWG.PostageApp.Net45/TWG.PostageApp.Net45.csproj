@@ -43,11 +43,11 @@
     <Compile Include="Converters\AccountInfoConverter.cs" />
     <Compile Include="Converters\MessageTransmissionsConverter.cs" />
     <Compile Include="Converters\MetricsConverter.cs" />
+    <Compile Include="Message\Message.cs" />
     <Compile Include="Transmissions\MessageTransmissions.cs" />
     <Compile Include="Message\Attachment.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Converters\ProjectInfoConverter.cs" />
-    <Compile Include="Message\Message.cs" />
     <Compile Include="Converters\MessageConverter.cs" />
     <Compile Include="Message\MessageInfo.cs" />
     <Compile Include="Message\MessageResponse.cs" />

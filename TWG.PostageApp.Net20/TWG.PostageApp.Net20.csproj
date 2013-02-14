@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{54559E8C-C959-40FC-AAF0-D674C17ADEE7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TWG.PostageApp</RootNamespace>
+    <AssemblyName>TWG.PostageApp</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net20\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountInfo.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="Common\PostageResponse.cs" />
+    <Compile Include="Common\PostageResponseException.cs" />
+    <Compile Include="Common\ResponseContainer.cs" />
+    <Compile Include="Common\ResponseStatus.cs" />
+    <Compile Include="Common\TransmissionsStatistic.cs" />
+    <Compile Include="Converters\AccountInfoConverter.cs" />
+    <Compile Include="Converters\MessageConverter.cs" />
+    <Compile Include="Converters\MessageResponseConverter.cs" />
+    <Compile Include="Converters\MessageTransmissionsConverter.cs" />
+    <Compile Include="Converters\MetricsConverter.cs" />
+    <Compile Include="Converters\PostageResponseConverter.cs" />
+    <Compile Include="Converters\ProjectInfoConverter.cs" />
+    <Compile Include="Message\Attachment.cs" />
+    <Compile Include="Message\Message.cs" />
+    <Compile Include="Message\MessageInfo.cs" />
+    <Compile Include="Message\MessageResponse.cs" />
+    <Compile Include="Message\Recipient.cs" />
+    <Compile Include="Metrics\Metric.cs" />
+    <Compile Include="Metrics\Metrics.cs" />
+    <Compile Include="Metrics\MetricStatistic.cs" />
+    <Compile Include="Project\ProjectInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transmissions\MessageTransmission.cs" />
+    <Compile Include="Transmissions\MessageTransmissions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

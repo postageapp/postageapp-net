@@ -2,7 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using TWG.PostageApp.Converters;
 
-namespace TWG.PostageApp.Tests
+namespace TWG.PostageApp.Net45.Tests
 {
     /// <summary>
     /// Represents metrics converter test.

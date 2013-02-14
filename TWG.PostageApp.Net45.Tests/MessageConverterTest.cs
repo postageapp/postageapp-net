@@ -6,7 +6,7 @@ using Newtonsoft.Json.Serialization;
 using TWG.PostageApp.Converters;
 using TWG.PostageApp.Message;
 
-namespace TWG.PostageApp.Tests
+namespace TWG.PostageApp.Net45.Tests
 {
     /// <summary>
     /// Represents message converter test.
