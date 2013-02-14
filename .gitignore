@@ -2,5 +2,6 @@
 */obj/*
 */bin/*
 *.suo
-TWG.PostageApp.Net45.Tests/App.config
+*/App.config
 PostageApp/obj/Debug/PostageApp.csproj.FileListAbsolute.txt
+TWG.PostageApp.Net45.Portable.Tests/App.config
