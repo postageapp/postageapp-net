@@ -1,0 +1,33 @@
+image: Visual Studio 2017
+version: 1.0.0-beta-{build}
+pull_requests:
+  do_not_increment_build_number: true
+build_script:
+  - ps: $buildNumber = "{0:d8}" -f [convert]::ToInt32($env:APPVEYOR_BUILD_NUMBER)
+  - ps: Write-Host "Version Suffix:" $buildNumber
+  - ps: dotnet restore
+  - ps: dotnet pack -c Release /p:BuildNumber=$buildNumber --include-symbols --output ../../nupkgs/beta
+
+artifacts:
+  - path: ./nupkgs/beta/**/*.nupkg
+    name: NuGet
+
+deploy:
+  - provider: NuGet
+    name: MyGet Beta Channel
+    on:
+      branch: dev
+    server: https://www.myget.org/F/postageapp/api/v2/package
+    api_key:
+      secure: uUSg50F5ec1bMyNNMvGbFfh6uZa7ItsP4Ug5TVeQPvmpYbFcov2Z1uXy7doyyd+w
+    skip_symbols: false
+    symbol_server: https://www.myget.org/F/postageapp/symbols/api/v2/package
+    artifact: /.*\.nupkg/
+  - provider: NuGet
+    name: NuGet Channel
+    on:
+      branch: master
+    api_key:
+      secure: 8dZVSJGj14GW04Rwa+Qk9UwYkBeeApG5PA32GBBDI3iS5TXUZ8i4ZugU61gCLh+Z
+    skip_symbols: true
+    artifact: /.*\.nupkg/

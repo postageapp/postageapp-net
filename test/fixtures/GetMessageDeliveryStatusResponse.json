@@ -1,0 +1,20 @@
+{
+    "response": {
+        "status": "ok",
+        "uid": "8d98e24814123a964eb9a57b87cab53a1fa95565"
+    },
+    "data": {
+        "delivery_status": [
+            {
+                "unique_id": "e5fbdcc8484066ae6a1a70efbc18ddf987c6cae4@agoracom.mailer.postageapp.com",
+                "recipient": "lbsr@agoracom.com",
+                "status": "completed"
+            },
+            {
+                "unique_id": "74441aa53b86f0ac5543485ddd55dd39dd7a25c7@agoracom.mailer.postageapp.com",
+                "recipient": "questionsagora@agoracom.com",
+                "status": "completed"
+            }
+        ]
+    }
+}

@@ -1,27 +1,30 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net45.Tests", "TWG.PostageApp.Net45.Tests\TWG.PostageApp.Net45.Tests.csproj", "{DA7D66BE-42C6-4B6D-B11C-8E0AA69169B5}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2009
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{5E5BEC92-53E4-4F13-B61E-A6BD36C29F6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net45", "TWG.PostageApp.Net45\TWG.PostageApp.Net45.csproj", "{52AE9C82-E2C1-4978-8136-B49081214FA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostageApp.Abstractions", "src\PostageApp.Abstractions\PostageApp.Abstractions.csproj", "{5346C4EB-9449-4E36-9B6B-36A45163CD8A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{DE19856C-B524-4D8C-8CED-B69A96127EB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostageApp.Http", "src\PostageApp.Http\PostageApp.Http.csproj", "{DEA337AF-7450-4E52-B670-D347871DC2EE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9B00F493-C19F-49F2-877B-D72B3E74088B}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
+		dir.props = dir.props
+		nuget.config = nuget.config
 		README.md = README.md
+		version.props = version.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net20", "TWG.PostageApp.Net20\TWG.PostageApp.Net20.csproj", "{54559E8C-C959-40FC-AAF0-D674C17ADEE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostageApp.Extensions.DependencyInjection", "src\PostageApp.Extensions.DependencyInjection\PostageApp.Extensions.DependencyInjection.csproj", "{16FACBCF-5EE6-456C-90E4-00CC9B2A5C95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net20.Tests", "TWG.PostageApp.Net20.Tests\TWG.PostageApp.Net20.Tests.csproj", "{F8699CA3-BCA2-4E8A-BF4E-EE9C8352AE2A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{26603C9B-6902-4E26-A566-B643C62F48D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net45.Portable", "TWG.PostageApp.Net45.Portable\TWG.PostageApp.Net45.Portable.csproj", "{23C87832-8E46-463F-A489-92C5A987E905}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net45.Portable.Tests", "TWG.PostageApp.Net45.Portable.Tests\TWG.PostageApp.Net45.Portable.Tests.csproj", "{0786868E-821F-4591-83C5-A1CEFC18E460}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net45.WP8", "TWG.PostageApp.Net45.WP8\TWG.PostageApp.Net45.WP8.csproj", "{A83EA74A-E3AE-493A-BEF0-736214DA5874}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWG.PostageApp.Net45.WP8.Tests", "TWG.PostageApp.Net45.WP8.Tests\TWG.PostageApp.Net45.WP8.Tests.csproj", "{EA80303E-E54F-417F-A949-F88C2F6B68B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostageApp.Samples.Console", "samples\PostageApp.Samples.Console\PostageApp.Samples.Console.csproj", "{1BD67929-DEB3-491F-ABD4-D4D3BB0A5114}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,40 +32,33 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DA7D66BE-42C6-4B6D-B11C-8E0AA69169B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA7D66BE-42C6-4B6D-B11C-8E0AA69169B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA7D66BE-42C6-4B6D-B11C-8E0AA69169B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA7D66BE-42C6-4B6D-B11C-8E0AA69169B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{52AE9C82-E2C1-4978-8136-B49081214FA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{52AE9C82-E2C1-4978-8136-B49081214FA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{52AE9C82-E2C1-4978-8136-B49081214FA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{52AE9C82-E2C1-4978-8136-B49081214FA6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54559E8C-C959-40FC-AAF0-D674C17ADEE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54559E8C-C959-40FC-AAF0-D674C17ADEE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54559E8C-C959-40FC-AAF0-D674C17ADEE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54559E8C-C959-40FC-AAF0-D674C17ADEE7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F8699CA3-BCA2-4E8A-BF4E-EE9C8352AE2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F8699CA3-BCA2-4E8A-BF4E-EE9C8352AE2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F8699CA3-BCA2-4E8A-BF4E-EE9C8352AE2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F8699CA3-BCA2-4E8A-BF4E-EE9C8352AE2A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{23C87832-8E46-463F-A489-92C5A987E905}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{23C87832-8E46-463F-A489-92C5A987E905}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{23C87832-8E46-463F-A489-92C5A987E905}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{23C87832-8E46-463F-A489-92C5A987E905}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0786868E-821F-4591-83C5-A1CEFC18E460}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0786868E-821F-4591-83C5-A1CEFC18E460}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0786868E-821F-4591-83C5-A1CEFC18E460}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0786868E-821F-4591-83C5-A1CEFC18E460}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A83EA74A-E3AE-493A-BEF0-736214DA5874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A83EA74A-E3AE-493A-BEF0-736214DA5874}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A83EA74A-E3AE-493A-BEF0-736214DA5874}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A83EA74A-E3AE-493A-BEF0-736214DA5874}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EA80303E-E54F-417F-A949-F88C2F6B68B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EA80303E-E54F-417F-A949-F88C2F6B68B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EA80303E-E54F-417F-A949-F88C2F6B68B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EA80303E-E54F-417F-A949-F88C2F6B68B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5346C4EB-9449-4E36-9B6B-36A45163CD8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5346C4EB-9449-4E36-9B6B-36A45163CD8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5346C4EB-9449-4E36-9B6B-36A45163CD8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5346C4EB-9449-4E36-9B6B-36A45163CD8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEA337AF-7450-4E52-B670-D347871DC2EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEA337AF-7450-4E52-B670-D347871DC2EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEA337AF-7450-4E52-B670-D347871DC2EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEA337AF-7450-4E52-B670-D347871DC2EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16FACBCF-5EE6-456C-90E4-00CC9B2A5C95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16FACBCF-5EE6-456C-90E4-00CC9B2A5C95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16FACBCF-5EE6-456C-90E4-00CC9B2A5C95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16FACBCF-5EE6-456C-90E4-00CC9B2A5C95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BD67929-DEB3-491F-ABD4-D4D3BB0A5114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BD67929-DEB3-491F-ABD4-D4D3BB0A5114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BD67929-DEB3-491F-ABD4-D4D3BB0A5114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BD67929-DEB3-491F-ABD4-D4D3BB0A5114}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5346C4EB-9449-4E36-9B6B-36A45163CD8A} = {5E5BEC92-53E4-4F13-B61E-A6BD36C29F6F}
+		{DEA337AF-7450-4E52-B670-D347871DC2EE} = {5E5BEC92-53E4-4F13-B61E-A6BD36C29F6F}
+		{16FACBCF-5EE6-456C-90E4-00CC9B2A5C95} = {5E5BEC92-53E4-4F13-B61E-A6BD36C29F6F}
+		{1BD67929-DEB3-491F-ABD4-D4D3BB0A5114} = {26603C9B-6902-4E26-A566-B643C62F48D7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09F1ED07-6E6A-4916-B589-A555FA34DB93}
 	EndGlobalSection
 EndGlobal
