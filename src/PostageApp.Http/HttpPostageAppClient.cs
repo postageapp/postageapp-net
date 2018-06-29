@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
@@ -46,7 +48,6 @@ namespace PostageApp.Http
             _jsonSerializerSettings = new JsonSerializerSettings
             {
                 ContractResolver = contractResolver,
-                // DateFormatString = "yyyy-MM-dd HH:mm:ss",
                 Formatting = Formatting.None
             };
 
@@ -320,16 +321,33 @@ namespace PostageApp.Http
 
         public async Task<SendMessageResult> SendMessageAsync(Message message, string uid = null, string apiKey = null, CancellationToken cancellationToken = default)
         {
-            // TODO
-            var internalData = new SendMessageRequest
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
+            var recipients = message.Recipients?
+                .Select(x => new KeyValuePair<string, Dictionary<string, string>>(x.Recipient, x.Variables))
+                .ToDictionary(x => x.Key, x => x.Value);
+
+            var requestModel = new SendMessageRequest
             {
                 ApiKey = apiKey ?? _options.ApiKey,
                 Uid = uid,
                 Arguments = new SendMessageRequestArgs
                 {
-                    From = message.From,
-                    Subject = message.Subject,
-                    // TODO
+                    Template = message.Template,
+                    RecipientOverride = message.RecipientOverride,
+                    Recipients = recipients,
+                    Content = message.Content,
+                    Headers = new Dictionary<string, string>
+                    {
+                        { "from", message.From },
+                        { "subject", message.Subject },
+                        { "reply-to", message.ReplyTo }
+                    },
+                    Variables = message.Variables,
+                    Attachments = message.Attachments
                 }
             };
 
@@ -337,7 +355,7 @@ namespace PostageApp.Http
                 = await SendHttpAsync<PostageAppResponsePayload<MessageRecieptResponseData>>(
                 HttpMethod.Post,
                 new Uri(new Uri(_options.BaseUri), V1_SEND_MESSAGE_URL),
-                internalData,
+                requestModel,
                 cancellationToken);
 
             switch (httpResponseMessage.StatusCode)
@@ -362,14 +380,13 @@ namespace PostageApp.Http
         private async Task<(HttpResponseMessage httpResponseMessage, TResult payload)>
             SendHttpAsync<TResult>(HttpMethod method, Uri uri, object item, CancellationToken cancellationToken = default)
         {
-            if (method != HttpMethod.Post && method != HttpMethod.Put && method != HttpMethod.Delete)
+            if (method != HttpMethod.Post)
             {
-                throw new ArgumentException("Value must be either post or put.", nameof(method));
+                throw new ArgumentException("Value must be post.", nameof(method));
             }
 
-            // a new StringContent must be created for each retry 
+            // a new StringContent must be created for each retry
             // as it is disposed after each call
-
             var requestMessage = new HttpRequestMessage(method, uri)
             {
                 Content = new StringContent(JsonConvert.SerializeObject(item, _jsonSerializerSettings), System.Text.Encoding.UTF8, "application/json")
