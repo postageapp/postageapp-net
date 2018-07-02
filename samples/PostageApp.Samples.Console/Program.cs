@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 
 using Microsoft.Extensions.Options;
-using PostageApp.Abstractions;
+
 using PostageApp.Http;
 
 namespace PostageApp.Samples.Console
