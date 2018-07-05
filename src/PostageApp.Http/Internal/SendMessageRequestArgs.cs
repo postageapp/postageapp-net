@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 
-using PostageApp.Abstractions;
-
 namespace PostageApp.Http.Internal
 {
     internal class SendMessageRequestArgs
@@ -16,7 +14,7 @@ namespace PostageApp.Http.Internal
 
         public Dictionary<string, string> Content { get; set; }
 
-        public Dictionary<string, MessageAttachment> Attachments { get; set; }
+        public Dictionary<string, SendMessageRequestAttachment> Attachments { get; set; }
 
         public Dictionary<string, string> Variables { get; set; }
     }

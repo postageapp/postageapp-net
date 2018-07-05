@@ -330,6 +330,31 @@ namespace PostageApp.Http
                 .Select(x => new KeyValuePair<string, Dictionary<string, string>>(x.Recipient, x.Variables))
                 .ToDictionary(x => x.Key, x => x.Value);
 
+            var headers = message.Headers.ToList();
+
+            if (message.From != null)
+            {
+                headers.Add(new KeyValuePair<string, string>("from", message.From));
+            }
+
+            if (message.Subject != null)
+            {
+                headers.Add(new KeyValuePair<string, string>("subject", message.Subject));
+            }
+
+            if (message.ReplyTo != null)
+            {
+                headers.Add(new KeyValuePair<string, string>("reply-to", message.ReplyTo));
+            }
+
+            var attachments = message.Attachments
+                .Select(x => new KeyValuePair<string, SendMessageRequestAttachment>(x.Key, new SendMessageRequestAttachment
+                {
+                    ContentType = x.Value.ContentType,
+                    Content = Convert.ToBase64String(x.Value.Content)
+                }))
+                .ToDictionary(x => x.Key, x => x.Value);
+
             var requestModel = new SendMessageRequest
             {
                 ApiKey = apiKey ?? _options.ApiKey,
@@ -340,14 +365,9 @@ namespace PostageApp.Http
                     RecipientOverride = message.RecipientOverride,
                     Recipients = recipients,
                     Content = message.Content,
-                    Headers = new Dictionary<string, string>
-                    {
-                        { "from", message.From },
-                        { "subject", message.Subject },
-                        { "reply-to", message.ReplyTo }
-                    },
+                    Headers = headers.ToDictionary(x => x.Key, x => x.Value),
                     Variables = message.Variables,
-                    Attachments = message.Attachments
+                    Attachments = attachments
                 }
             };
 

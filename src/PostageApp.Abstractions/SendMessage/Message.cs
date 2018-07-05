@@ -12,11 +12,13 @@ namespace PostageApp.Abstractions
 
         public string Template { get; set; }
 
-        public MessageRecipient[] Recipients { get; set; }
+        public List<MessageRecipient> Recipients { get; set; } = new List<MessageRecipient>();
 
-        public Dictionary<string, string> Variables { get; set; }
+        public Dictionary<string, string> Variables { get; set; } = new Dictionary<string, string>();
 
-        public Dictionary<string, string> Content { get; set; }
+        public Dictionary<string, string> Content { get; set; } = new Dictionary<string, string>();
+
+        public Dictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
 
         /// <summary>
         /// When developing an application it is often useful to override the list of recipients with your own email.
@@ -25,6 +27,6 @@ namespace PostageApp.Abstractions
         /// </summary>
         public string RecipientOverride { get; set; }
 
-        public Dictionary<string, MessageAttachment> Attachments { get; set; }
+        public Dictionary<string, MessageAttachment> Attachments { get; set; } = new Dictionary<string, MessageAttachment>();
     }
 }

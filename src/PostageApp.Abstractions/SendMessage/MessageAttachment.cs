@@ -2,11 +2,14 @@
 {
     public class MessageAttachment
     {
-        public string ContentType { get; set; }
+        public MessageAttachment(byte[] content, string contentType)
+        {
+            Content = content;
+            ContentType = contentType;
+        }
 
-        /// <summary>
-        /// Gets or sets BASE64_ENCODED_CONTENT
-        /// </summary>
-        public string Content { get; set; }
+        public byte[] Content { get; }
+
+        public string ContentType { get; }
     }
 }
