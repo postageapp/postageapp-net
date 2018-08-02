@@ -1,5 +1,5 @@
 image: Visual Studio 2017
-version: 1.0.0-beta-{build}
+version: 2.0.0-beta-{build}
 
 before_build:
   - ps: nuget restore
@@ -14,7 +14,7 @@ build_script:
   - ps: dotnet pack -c Release /p:BuildNumber=$buildNumber --include-symbols --output ../../nupkgs/beta
 
 test_script:
-  - ps: dotnet test -c Release --no-build test/PostageApp.Http.Tests /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+  - ps: dotnet test -c Release test/PostageApp.Http.Tests /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
 after_test:
   - ps: codecov -f "coverage.opencover.xml"
