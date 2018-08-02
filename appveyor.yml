@@ -27,18 +27,10 @@ deploy:
   - provider: NuGet
     name: MyGet Beta Channel
     on:
-      branch: dev
+      branch: netcore
     server: https://www.myget.org/F/postageapp/api/v2/package
     api_key:
       secure: uUSg50F5ec1bMyNNMvGbFfh6uZa7ItsP4Ug5TVeQPvmpYbFcov2Z1uXy7doyyd+w
     skip_symbols: false
     symbol_server: https://www.myget.org/F/postageapp/symbols/api/v2/package
-    artifact: /.*\.nupkg/
-  - provider: NuGet
-    name: NuGet Channel
-    on:
-      branch: master
-    api_key:
-      secure: 8dZVSJGj14GW04Rwa+Qk9UwYkBeeApG5PA32GBBDI3iS5TXUZ8i4ZugU61gCLh+Z
-    skip_symbols: true
     artifact: /.*\.nupkg/
