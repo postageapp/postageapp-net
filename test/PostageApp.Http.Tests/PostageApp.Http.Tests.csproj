@@ -1,0 +1,69 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="fixtures\GetAccountInfoResponse.json" />
+    <None Remove="fixtures\GetMessageDeliveryStatusResponse.json" />
+    <None Remove="fixtures\GetMessageRecieptResponse.json" />
+    <None Remove="fixtures\GetMessagesHistoryDetailedResponse.json" />
+    <None Remove="fixtures\GetMessagesHistoryResponse.json" />
+    <None Remove="fixtures\GetMessagesResponse.json" />
+    <None Remove="fixtures\GetMessageTransmissionsResponse.json" />
+    <None Remove="fixtures\GetMetricsResponse.json" />
+    <None Remove="fixtures\GetProjectInfoResponse.json" />
+    <None Remove="fixtures\GetSuppressionListResponse.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="fixtures\GetAccountInfoResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fixtures\GetMessageDeliveryStatusResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fixtures\GetMessageRecieptResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fixtures\GetMessagesHistoryDetailedResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fixtures\GetMessagesHistoryResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fixtures\GetMessagesResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fixtures\GetMessageTransmissionsResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fixtures\GetMetricsResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fixtures\GetProjectInfoResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fixtures\GetSuppressionListResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.msbuild" Version="2.1.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+    <PackageReference Include="Moq" Version="4.9.0" />
+    <PackageReference Include="RichardSzalay.MockHttp" Version="5.0.0" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\PostageApp.Http\PostageApp.Http.csproj" />
+  </ItemGroup>
+
+</Project>

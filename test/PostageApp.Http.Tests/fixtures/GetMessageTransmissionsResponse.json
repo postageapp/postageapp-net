@@ -1,0 +1,31 @@
+{
+    "response": {
+        "status": "ok",
+        "uid": "some_uid"
+    },
+    "data": {
+        "message": {
+            "id": 425416050
+        },
+        "transmissions": {
+            "test@example.org": {
+                "status": "completed",
+                "created_at": "2018-05-30 15:01:22",
+                "failed_at": null,
+                "opened_at": "2018-05-30 15:07:16",
+                "clicked_at": null,
+                "result_code": null,
+                "error_message": null
+            },
+            "bad@example.org": {
+                "status": "failed",
+                "created_at": "2012-07-04 18:58:57",
+                "failed_at": "2012-07-04 18:58:59",
+                "opened_at": null,
+                "clicked_at": null,
+                "result_code": "SMTP_554",
+                "error_message": "User does not exist"
+            }
+        }
+    }
+}
