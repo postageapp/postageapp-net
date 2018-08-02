@@ -24,7 +24,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostageApp.Extensions.Depen
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{26603C9B-6902-4E26-A566-B643C62F48D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostageApp.Samples.Console", "samples\PostageApp.Samples.Console\PostageApp.Samples.Console.csproj", "{1BD67929-DEB3-491F-ABD4-D4D3BB0A5114}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostageApp.Samples.Console", "samples\PostageApp.Samples.Console\PostageApp.Samples.Console.csproj", "{1BD67929-DEB3-491F-ABD4-D4D3BB0A5114}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D14D54FD-7F41-454F-A81C-09155E13571D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostageApp.Http.Tests", "test\PostageApp.Http.Tests\PostageApp.Http.Tests.csproj", "{3CF31897-9B05-4946-AE1A-9050541B207B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +52,10 @@ Global
 		{1BD67929-DEB3-491F-ABD4-D4D3BB0A5114}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BD67929-DEB3-491F-ABD4-D4D3BB0A5114}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BD67929-DEB3-491F-ABD4-D4D3BB0A5114}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CF31897-9B05-4946-AE1A-9050541B207B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CF31897-9B05-4946-AE1A-9050541B207B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CF31897-9B05-4946-AE1A-9050541B207B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CF31897-9B05-4946-AE1A-9050541B207B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +65,7 @@ Global
 		{DEA337AF-7450-4E52-B670-D347871DC2EE} = {5E5BEC92-53E4-4F13-B61E-A6BD36C29F6F}
 		{16FACBCF-5EE6-456C-90E4-00CC9B2A5C95} = {5E5BEC92-53E4-4F13-B61E-A6BD36C29F6F}
 		{1BD67929-DEB3-491F-ABD4-D4D3BB0A5114} = {26603C9B-6902-4E26-A566-B643C62F48D7}
+		{3CF31897-9B05-4946-AE1A-9050541B207B} = {D14D54FD-7F41-454F-A81C-09155E13571D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {09F1ED07-6E6A-4916-B589-A555FA34DB93}

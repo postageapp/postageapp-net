@@ -4,8 +4,10 @@
     {
         public GetMetricsResponseDataMetricDetails Delivered { get; set; }
         public GetMetricsResponseDataMetricDetails Opened { get; set; }
+        public GetMetricsResponseDataMetricDetails Clicked { get; set; }
         public GetMetricsResponseDataMetricDetails Failed { get; set; }
         public GetMetricsResponseDataMetricDetails Rejected { get; set; }
+        public GetMetricsResponseDataMetricDetails Spammed { get; set; }
         public GetMetricsResponseDataMetricDetails Created { get; set; }
         public GetMetricsResponseDataMetricDetails Queued { get; set; }
     }

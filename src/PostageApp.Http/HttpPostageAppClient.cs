@@ -405,11 +405,13 @@ namespace PostageApp.Http
                 throw new ArgumentException("Value must be post.", nameof(method));
             }
 
+            var body = JsonConvert.SerializeObject(item, _jsonSerializerSettings);
+
             // a new StringContent must be created for each retry
             // as it is disposed after each call
             var requestMessage = new HttpRequestMessage(method, uri)
             {
-                Content = new StringContent(JsonConvert.SerializeObject(item, _jsonSerializerSettings), System.Text.Encoding.UTF8, "application/json")
+                Content = new StringContent(body, System.Text.Encoding.UTF8, "application/json")
             };
 
             HttpResponseMessage httpResponseMessage = await _httpClient.SendAsync(requestMessage, cancellationToken);

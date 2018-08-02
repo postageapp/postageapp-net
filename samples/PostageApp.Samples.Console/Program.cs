@@ -17,6 +17,8 @@ namespace PostageApp.Samples.Console
             };
 
             var client = new HttpPostageAppClient(Options.Create(options), new System.Net.Http.HttpClient());
+
+            await client.GetAccountInfoAsync();
         }
     }
 }

@@ -1,0 +1,12 @@
+{
+    "response": {
+        "status": "ok",
+        "uid": "some_uid"
+    },
+    "data": {
+        "message": {
+            "id": 425417566,
+            "url": "https://x.postageapp.com/projects/5/messages/425417566"
+        }
+    }
+}
