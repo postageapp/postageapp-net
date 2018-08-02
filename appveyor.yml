@@ -1,6 +1,9 @@
 image: Visual Studio 2017
 version: 2.0.0-beta-{build}
 
+pull_requests:
+  do_not_increment_build_number: true
+
 before_build:
   - ps: nuget restore
   - ps: choco install codecov
@@ -30,7 +33,7 @@ deploy:
       branch: netcore
     server: https://www.myget.org/F/postageapp/api/v2/package
     api_key:
-      secure: uUSg50F5ec1bMyNNMvGbFfh6uZa7ItsP4Ug5TVeQPvmpYbFcov2Z1uXy7doyyd+w
+      secure: a+GHoopZDn5PyBTCv8FV3TgvvDZ04XE4F3u9MDWShc8ORDSkWn1gi8WBov8UKk81
     skip_symbols: false
     symbol_server: https://www.myget.org/F/postageapp/symbols/api/v2/package
     artifact: /.*\.nupkg/
