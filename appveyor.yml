@@ -17,7 +17,7 @@ test_script:
   - ps: dotnet test -c Release test/PostageApp.Http.Tests /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
 after_test:
-  - ps: codecov -f "coverage.opencover.xml"
+  - ps: codecov -f "./test/PostageApp.Http.Tests/coverage.opencover.xml"
 
 artifacts:
   - path: ./nupkgs/beta/**/*.nupkg
