@@ -43,6 +43,7 @@ namespace PostageApp.Http.Tests
             SetupGetMessageTransmissionsMockHttp();
             SetupGetMetricsMockHttp();
             SetupGetProjectInfoMockHttp();
+            SetupGetSuppressionListMockHttp();
 
             return new HttpPostageAppClient(
                 MockOptions.Object,
@@ -89,6 +90,20 @@ namespace PostageApp.Http.Tests
             MockHttp.When(HttpMethod.Post, uri)
                 .WithContent(BuildContent("successfull_api_key"))
                 .Respond("application/json", ReadFixtureFile("GetProjectInfoResponse"));
+        }
+
+        private void SetupGetSuppressionListMockHttp()
+        {
+            var uri = $"{_baseUri}/v.1.0/get_suppression_list.json";
+
+            SetupGeneralCallError(uri, (t) => BuildContent(t));
+            SetupGeneralConflict(uri, (t) => BuildContent(t));
+            SetupGeneralLocked(uri, (t) => BuildContent(t));
+            SetupGeneralUnauthorized(uri, (t) => BuildContent(t));
+
+            MockHttp.When(HttpMethod.Post, uri)
+                .WithContent(BuildContent("successfull_api_key"))
+                .Respond("application/json", ReadFixtureFile("GetSuppressionListResponse"));
         }
 
         private void SetupGetMessagesHistoryMockHttp()

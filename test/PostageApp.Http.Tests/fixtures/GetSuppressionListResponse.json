@@ -5,41 +5,17 @@
     },
     "data": {
         "recipients": {
-            "scwienkala@aol.com": {
-                "status": "rejected",
-                "suppression_state": "spam_report",
-                "blocked_until": null,
-                "message": "2.0.0 Ok: queued as DB3E97000008D"
-            },
-            "ohgee_43@hotmail.com": {
+            "email1@example.com": {
                 "status": "rejected",
                 "suppression_state": "hard_bounce",
-                "blocked_until": "2018-10-16T14:34:15Z",
-                "message": "5.5.0 Requested action not taken: mailbox unavailable. [BY2NAM01FT034.eop-nam01.prod.protection.outlook.com]"
+                "blocked_until": "2014-02-09T17:32:31Z",
+                "message": "No Such User Here"
             },
-            "jay911@post.com": {
-                "status": "rejected",
-                "suppression_state": "hard_bounce",
-                "blocked_until": "2018-08-25T14:34:15Z",
-                "message": "Requested action not taken: mailbox unavailable"
-            },
-            "christian-christ@t-online.de": {
-                "status": "rejected",
-                "suppression_state": "hard_bounce",
-                "blocked_until": "2018-09-12T14:34:15Z",
-                "message": "5.1.1 user unknown Unknown recipient."
-            },
-            "rjames13006@yahoo.com": {
-                "status": "rejected",
-                "suppression_state": "hard_bounce",
-                "blocked_until": "2018-09-06T14:34:15Z",
-                "message": "delivery error: dd This user doesn't have a yahoo.com account (rjames13006@yahoo.com) [0] - mta4319.mail.bf1.yahoo.com"
-            },
-            "lostcoastkid1@gmail.com": {
-                "status": "rejected",
-                "suppression_state": "hard_bounce",
-                "blocked_until": "2018-09-01T14:34:15Z",
-                "message": "5.1.1 The email account that you tried to reach does not exist. Please try double-checking the recipient's email address for typos or unnecessary spaces. Learn more at https://support.google.com/mail/?p=NoSuchUser k14-v6si8065194itc.97 - gsmtp"
+            "email2@example.org": {
+                "status": "warning",
+                "suppression_state": "soft_bounce",
+                "blocked_until": "2014-04-07T17:32:31Z",
+                "message": "Requested action not taken: mailbox temporarily unavailable"
             }
         }
     }
