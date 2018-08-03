@@ -1,4 +1,4 @@
-﻿namespace PostageApp.Abstractions.GetMessages
+﻿namespace PostageApp.Abstractions
 {
     public class GetMessagesResult
     {

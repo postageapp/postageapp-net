@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PostageApp.Abstractions.GetMessages
+namespace PostageApp.Abstractions
 {
     public class MessageResponseData : Dictionary<string, MessageResponseDataMessage>
     {

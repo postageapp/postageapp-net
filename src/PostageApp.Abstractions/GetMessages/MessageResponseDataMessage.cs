@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PostageApp.Abstractions.GetMessages
+namespace PostageApp.Abstractions
 {
     public class MessageResponseDataMessage
     {

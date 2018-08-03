@@ -12,7 +12,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 using PostageApp.Abstractions;
-using PostageApp.Abstractions.GetMessages;
 using PostageApp.Http.Internal;
 
 namespace PostageApp.Http

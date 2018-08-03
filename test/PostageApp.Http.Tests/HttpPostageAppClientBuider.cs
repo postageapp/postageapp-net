@@ -44,6 +44,7 @@ namespace PostageApp.Http.Tests
             SetupGetMetricsMockHttp();
             SetupGetProjectInfoMockHttp();
             SetupGetSuppressionListMockHttp();
+            SetupGetMessagesMockHttp();
 
             return new HttpPostageAppClient(
                 MockOptions.Object,
@@ -118,6 +119,20 @@ namespace PostageApp.Http.Tests
             MockHttp.When(HttpMethod.Post, uri)
                 .WithContent(BuildContent("successfull_api_key"))
                 .Respond("application/json", ReadFixtureFile("GetMessagesHistoryResponse"));
+        }
+
+        private void SetupGetMessagesMockHttp()
+        {
+            var uri = $"{_baseUri}/v.1.0/get_messages.json";
+
+            SetupGeneralCallError(uri, (t) => BuildContentPage(t, 1));
+            SetupGeneralConflict(uri, (t) => BuildContentPage(t, 1));
+            SetupGeneralLocked(uri, (t) => BuildContentPage(t, 1));
+            SetupGeneralUnauthorized(uri, (t) => BuildContentPage(t, 1));
+
+            MockHttp.When(HttpMethod.Post, uri)
+                .WithContent(BuildContentPage("successfull_api_key", 2))
+                .Respond("application/json", ReadFixtureFile("GetMessagesResponse"));
         }
 
         private void SetupGetMessagesHistoryDetailedMockHttp()
@@ -224,6 +239,11 @@ namespace PostageApp.Http.Tests
         private string BuildContent(string apiKey)
         {
             return "{\"api_key\":\"" + apiKey + "\"}";
+        }
+
+        private string BuildContentPage(string apiKey, int page)
+        {
+            return "{\"api_key\":\"" + apiKey + "\",\"arguments\":{\"page\":" + page + "}}";
         }
 
         private string ReadFixtureFile(string fileName)
