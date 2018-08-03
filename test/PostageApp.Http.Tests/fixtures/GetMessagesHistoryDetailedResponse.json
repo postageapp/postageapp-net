@@ -10,44 +10,20 @@
         ],
         "messages_history": [
             {
-                "unique_id": "0d403076d24dce3aebb203b4dc94165514e654f6@agoracom.mailer.postageapp.com",
-                "message_id": "430057347",
-                "uid": "7c1826756b2f43d6bd54a66c986bafd2d81cb654",
-                "recipient": "ieltsweatman@gmail.com",
+                "unique_id": "36598cc85e020a01384ea7653872c8e87536869c@mailer.postageapp.com",
+                "message_id": 23490345,
+                "uid": "36598cc85e020a01384ea7653872c8e87536869c",
+                "recipient": "recipient@example.com",
                 "status": "completed",
-                "created_at": "2018-06-28 00:34:19"
+                "created_at": "2017-03-30 21:24:41"
             },
             {
-                "unique_id": "902cc41ee1bc7302ec8f2d17c97bfd2775fce6d2@agoracom.mailer.postageapp.com",
-                "message_id": "430061622",
-                "uid": "940641f91e37aa45e16a39448c85f8469792e8c8",
-                "recipient": "geoffandmaxine@shaw.ca",
+                "unique_id": "cdfc8a4254ab3f44f37f0de9b50f6a3cb402030a@mailer.postageapp.com",
+                "message_id": 23490491,
+                "uid": "cdfc8a4254ab3f44f37f0de9b50f6a3cb402030a",
+                "recipient": "recipient@example.net",
                 "status": "completed",
-                "created_at": "2018-06-28 01:40:09"
-            },
-            {
-                "unique_id": "b81e29b0b15c289b476f349a0fca81c813281086@agoracom.mailer.postageapp.com",
-                "message_id": "430070376",
-                "uid": "d94c51172dcc8ef587880e248532f442ada8d723",
-                "recipient": "ackershaw@live.com",
-                "status": "completed",
-                "created_at": "2018-06-28 03:08:22"
-            },
-            {
-                "unique_id": "0f966a47232eed5753c594d0f53a30b30994e1e0@agoracom.mailer.postageapp.com",
-                "message_id": "430071309",
-                "uid": "886f0b5a115dbbf8dd055b2e694f08d5c73b833f",
-                "recipient": "ppascali@pyrogenesis.com",
-                "status": "completed",
-                "created_at": "2018-06-28 03:19:31"
-            },
-            {
-                "unique_id": "6375c637445ef0dbcb439d41a1d54b80bbc4dae8@agoracom.mailer.postageapp.com",
-                "message_id": "430073510",
-                "uid": "432c2ba8c0221f8733010d990fc5428fbcaa35d0",
-                "recipient": "mcamustangs12@gmail.com",
-                "status": "completed",
-                "created_at": "2018-06-28 03:48:48"
+                "created_at": "2017-03-30 21:25:29"
             }
         ]
     }

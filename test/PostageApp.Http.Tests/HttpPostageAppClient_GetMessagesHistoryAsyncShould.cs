@@ -6,7 +6,7 @@ using Xunit;
 
 namespace PostageApp.Http.Tests
 {
-    public class HttpPostageAppClient_GetAccountInfoAsyncShould
+    public class HttpPostageAppClient_GetMessagesHistoryAsyncShould
     {
         [Fact]
         public async Task ReturnSuccededGivenExistingApiKey()
@@ -19,7 +19,7 @@ namespace PostageApp.Http.Tests
             var client = builder.Build();
 
             // Act
-            var result = await client.GetAccountInfoAsync();
+            var result = await client.GetMessagesHistoryAsync();
 
             // Assert
             Assert.True(result.Succeeded);
@@ -29,17 +29,16 @@ namespace PostageApp.Http.Tests
             Assert.Null(result.ResponseMeta.Uid);
             Assert.Null(result.ResponseMeta.Message);
 
-            Assert.Equal("AccountName", result.Data.Account.Name);
-            Assert.Equal("https://account-name.postageapp.com/", result.Data.Account.Url);
+            Assert.Equal(2, result.Data.MessagesHistory.Length);
 
-            Assert.Equal(84, result.Data.Account.Transmissions.Today);
-            Assert.Equal(3750, result.Data.Account.Transmissions.ThisMonth);
-            Assert.Equal(291517, result.Data.Account.Transmissions.Overall);
-
-            Assert.Equal(new Dictionary<string, string> {
-                { "email1@email.com", "User 1" },
-                { "email2@email.com", "User2" }
-            }, result.Data.Account.Users);
+            Assert.Equal(19782, result.Data.MessagesHistory[0].Id);
+            Assert.Equal("36598cc85e020a01384ea7653872c8e87536869c", result.Data.MessagesHistory[0].Uid);
+            Assert.Equal("Newsletter No. 3326", result.Data.MessagesHistory[0].Subject);
+            Assert.Equal(new DateTime(2013, 03, 30, 21, 24, 41), result.Data.MessagesHistory[0].CreatedAt);
+            Assert.Equal(399, result.Data.MessagesHistory[0].Count);
+            Assert.Equal(0, result.Data.MessagesHistory[0].QueuedCount);
+            Assert.Equal(1, result.Data.MessagesHistory[0].FailedCount);
+            Assert.Equal(398, result.Data.MessagesHistory[0].CompletedCount);
 
             builder.MockHttp.VerifyNoOutstandingRequest();
         }
@@ -55,11 +54,11 @@ namespace PostageApp.Http.Tests
             var client = builder.Build();
 
             // Act
-            var result = await client.GetAccountInfoAsync();
+            var result = await client.GetMessagesHistoryAsync();
 
             // Assert
             Assert.False(result.Succeeded);
-            Assert.Equal(GetAccountInfoErrorCode.Unauthorized, result.Error.Value);
+            Assert.Equal(GetMessagesHistoryErrorCode.Unauthorized, result.Error.Value);
 
             Assert.Equal("unauthorized", result.ResponseMeta.Status);
             Assert.Null(result.ResponseMeta.Uid);
@@ -81,11 +80,11 @@ namespace PostageApp.Http.Tests
             var client = builder.Build();
 
             // Act
-            var result = await client.GetAccountInfoAsync();
+            var result = await client.GetMessagesHistoryAsync();
 
             // Assert
             Assert.False(result.Succeeded);
-            Assert.Equal(GetAccountInfoErrorCode.Locked, result.Error.Value);
+            Assert.Equal(GetMessagesHistoryErrorCode.Locked, result.Error.Value);
 
             Assert.Equal("locked", result.ResponseMeta.Status);
             Assert.Null(result.ResponseMeta.Uid);
@@ -108,7 +107,7 @@ namespace PostageApp.Http.Tests
 
             // Act
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => client.GetAccountInfoAsync());
+                () => client.GetMessagesHistoryAsync());
 
             // Assert
             Assert.Equal("Invalid API version.", exception.Message);
@@ -128,7 +127,7 @@ namespace PostageApp.Http.Tests
 
             // Act
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => client.GetAccountInfoAsync());
+                () => client.GetMessagesHistoryAsync());
 
             // Assert
             Assert.Equal("The posted content is not valid JSON.", exception.Message);

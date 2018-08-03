@@ -12,6 +12,7 @@ namespace PostageApp.Abstractions
 
         public string Recipient { get; set; }
 
+        // TODO to Enum
         public string Status { get; set; }
 
         public DateTime CreatedAt { get; set; }

@@ -5,7 +5,7 @@
     },
     "data": {
         "project": {
-            "name": "AccountName",
+            "name": "ProjectName",
             "url": "https://account-name.postageapp.com/projects/5",
             "transmissions": {
                 "today": 83,

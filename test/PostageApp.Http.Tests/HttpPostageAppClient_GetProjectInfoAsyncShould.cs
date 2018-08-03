@@ -6,7 +6,7 @@ using Xunit;
 
 namespace PostageApp.Http.Tests
 {
-    public class HttpPostageAppClient_GetAccountInfoAsyncShould
+    public class HttpPostageAppClient_GetProjectInfoAsyncShould
     {
         [Fact]
         public async Task ReturnSuccededGivenExistingApiKey()
@@ -19,7 +19,7 @@ namespace PostageApp.Http.Tests
             var client = builder.Build();
 
             // Act
-            var result = await client.GetAccountInfoAsync();
+            var result = await client.GetProjectInfoAsync();
 
             // Assert
             Assert.True(result.Succeeded);
@@ -29,17 +29,17 @@ namespace PostageApp.Http.Tests
             Assert.Null(result.ResponseMeta.Uid);
             Assert.Null(result.ResponseMeta.Message);
 
-            Assert.Equal("AccountName", result.Data.Account.Name);
-            Assert.Equal("https://account-name.postageapp.com/", result.Data.Account.Url);
+            Assert.Equal("ProjectName", result.Data.Project.Name);
+            Assert.Equal("https://account-name.postageapp.com/projects/5", result.Data.Project.Url);
 
-            Assert.Equal(84, result.Data.Account.Transmissions.Today);
-            Assert.Equal(3750, result.Data.Account.Transmissions.ThisMonth);
-            Assert.Equal(291517, result.Data.Account.Transmissions.Overall);
+            Assert.Equal(83, result.Data.Project.Transmissions.Today);
+            Assert.Equal(3677, result.Data.Project.Transmissions.ThisMonth);
+            Assert.Equal(615788, result.Data.Project.Transmissions.Overall);
 
             Assert.Equal(new Dictionary<string, string> {
                 { "email1@email.com", "User 1" },
                 { "email2@email.com", "User2" }
-            }, result.Data.Account.Users);
+            }, result.Data.Project.Users);
 
             builder.MockHttp.VerifyNoOutstandingRequest();
         }
@@ -55,11 +55,11 @@ namespace PostageApp.Http.Tests
             var client = builder.Build();
 
             // Act
-            var result = await client.GetAccountInfoAsync();
+            var result = await client.GetProjectInfoAsync();
 
             // Assert
             Assert.False(result.Succeeded);
-            Assert.Equal(GetAccountInfoErrorCode.Unauthorized, result.Error.Value);
+            Assert.Equal(GetProjectInfoErrorCode.Unauthorized, result.Error.Value);
 
             Assert.Equal("unauthorized", result.ResponseMeta.Status);
             Assert.Null(result.ResponseMeta.Uid);
@@ -81,11 +81,11 @@ namespace PostageApp.Http.Tests
             var client = builder.Build();
 
             // Act
-            var result = await client.GetAccountInfoAsync();
+            var result = await client.GetProjectInfoAsync();
 
             // Assert
             Assert.False(result.Succeeded);
-            Assert.Equal(GetAccountInfoErrorCode.Locked, result.Error.Value);
+            Assert.Equal(GetProjectInfoErrorCode.Locked, result.Error.Value);
 
             Assert.Equal("locked", result.ResponseMeta.Status);
             Assert.Null(result.ResponseMeta.Uid);
@@ -108,7 +108,7 @@ namespace PostageApp.Http.Tests
 
             // Act
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => client.GetAccountInfoAsync());
+                () => client.GetProjectInfoAsync());
 
             // Assert
             Assert.Equal("Invalid API version.", exception.Message);
@@ -128,7 +128,7 @@ namespace PostageApp.Http.Tests
 
             // Act
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => client.GetAccountInfoAsync());
+                () => client.GetProjectInfoAsync());
 
             // Assert
             Assert.Equal("The posted content is not valid JSON.", exception.Message);

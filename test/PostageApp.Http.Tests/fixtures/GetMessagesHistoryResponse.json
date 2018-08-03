@@ -6,41 +6,21 @@
     "data": {
         "messages_history": [
             {
-                "id": 425416050,
-                "uid": "8d98e24814123a964eb9a57b87cab53a1fa95565",
-                "subject": "[Agoracom] (Liberty Star Uranium & Metals) New Message Posted as a Question - New Tours",
-                "created_at": "2018-05-30 15:01:21",
-                "count": 2,
-                "queued_count": 0,
-                "failed_count": 0,
-                "completed_count": 2
-            },
-            {
-                "id": 425417566,
-                "uid": "367abbe965360923a196cdd56baf1412957f3553",
-                "subject": "You received a private message",
-                "created_at": "2018-05-30 15:18:01",
-                "count": 1,
+                "id": 19782,
+                "uid": "36598cc85e020a01384ea7653872c8e87536869c",
+                "subject": "Newsletter No. 3326",
+                "created_at": "2013-03-30 21:24:41",
+                "count": 399,
                 "queued_count": 0,
                 "failed_count": 1,
-                "completed_count": 0
+                "completed_count": 398
             },
             {
-                "id": 425417816,
-                "uid": "56d431fae9bf92a84f75b9fdb6c08c177489f4f6",
-                "subject": "You received a private message",
-                "created_at": "2018-05-30 15:19:17",
-                "count": 1,
-                "queued_count": 0,
-                "failed_count": 1,
-                "completed_count": 0
-            },
-            {
-                "id": 425434533,
-                "uid": "12681cd3ed7555c5f015b5b91575912e0324bdaa",
-                "subject": "You received a private message",
-                "created_at": "2018-05-30 16:59:17",
-                "count": 1,
+                "id": 19944,
+                "uid": "ee69a0e058750c5cb5b417b3dd01bf4685b4933d",
+                "subject": "System Update Notice",
+                "created_at": "2013-08-13 16:05:02",
+                "count": 400,
                 "queued_count": 0,
                 "failed_count": 0,
                 "completed_count": 1
