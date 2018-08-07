@@ -1,4 +1,6 @@
-#PostageApp .NET
+# PostageApp .NET
+
+[![codecov](https://codecov.io/gh/vad3x/postageapp-net/branch/master/graph/badge.svg)](https://codecov.io/gh/vad3x/postageapp-net)
 
 This client library will allow you to quickly send email from a .NET Core application via the [PostageApp](http://postageapp.com) API.
 Specify one or more recipients, your template along with variables to substitute, enjoy open and click tracking, and quick, reliable delivery.
