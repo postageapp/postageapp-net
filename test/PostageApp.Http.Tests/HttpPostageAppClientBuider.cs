@@ -268,6 +268,18 @@ namespace PostageApp.Http.Tests
             MockHttp.When(HttpMethod.Post, uri)
                 .WithContent(BuildEmptyMessageContent("successfull_api_key"))
                 .Respond("application/json", ReadFixtureFile("SendMessageResponse"));
+
+            MockHttp.When(HttpMethod.Post, uri)
+                .WithContent(BuildMessageWithRecipientWithVarsContent("successfull_api_key"))
+                .Respond("application/json", ReadFixtureFile("SendMessageResponse"));
+
+            MockHttp.When(HttpMethod.Post, uri)
+                .WithContent(BuildMessageWithVarsContent("successfull_api_key"))
+                .Respond("application/json", ReadFixtureFile("SendMessageResponse"));
+
+            MockHttp.When(HttpMethod.Post, uri)
+                .WithContent(BuildMessagWithRecipientOverrideContent("successfull_api_key"))
+                .Respond("application/json", ReadFixtureFile("SendMessageResponse"));
         }
 
         private string BuildMessageWithFromHeaderContent(string apiKey)
@@ -313,6 +325,21 @@ namespace PostageApp.Http.Tests
         private string BuildMessageWithContentContent(string apiKey)
         {
             return "{\"api_key\":\"" + apiKey + "\",\"uid\":null,\"arguments\":{\"template\":null,\"recipient_override\":null,\"recipients\":{},\"headers\":{},\"content\":{\"text/plain\":\"Text Content\",\"text/html\":\"HTML Content\"},\"attachments\":{},\"variables\":{}}}";
+        }
+
+        private string BuildMessageWithRecipientWithVarsContent(string apiKey)
+        {
+            return "{\"api_key\":\"" + apiKey + "\",\"uid\":null,\"arguments\":{\"template\":null,\"recipient_override\":null,\"recipients\":{\"e1@example.com\":{\"var1\":\"value1\",\"var2\":\"value2\"}},\"headers\":{},\"content\":{},\"attachments\":{},\"variables\":{}}}";
+        }
+
+        private string BuildMessageWithVarsContent(string apiKey)
+        {
+            return "{\"api_key\":\"" + apiKey + "\",\"uid\":null,\"arguments\":{\"template\":null,\"recipient_override\":null,\"recipients\":{},\"headers\":{},\"content\":{},\"attachments\":{},\"variables\":{\"var1\":\"value1\",\"var2\":\"value2\"}}}";
+        }
+
+        private string BuildMessagWithRecipientOverrideContent(string apiKey)
+        {
+            return "{\"api_key\":\"" + apiKey + "\",\"uid\":null,\"arguments\":{\"template\":null,\"recipient_override\":\"override@example.com\",\"recipients\":{},\"headers\":{},\"content\":{},\"attachments\":{},\"variables\":{}}}";
         }
 
         private string BuildEmptyMessageContent(string apiKey)

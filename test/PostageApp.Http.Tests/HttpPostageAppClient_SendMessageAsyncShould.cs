@@ -47,6 +47,108 @@ namespace PostageApp.Http.Tests
         }
 
         [Fact]
+        public async Task ReturnSuccededGivenRecipientWithVars()
+        {
+            // Arrange
+            var builder = new HttpPostageAppClientBuider()
+                .WithBaseUri("http://test")
+                .WithApiKey("successfull_api_key");
+
+            var client = builder.Build();
+
+            var message = new Message
+            {
+                Recipients = new List<MessageRecipient>
+                {
+                    new MessageRecipient("e1@example.com", new Dictionary<string, string> {
+                        { "var1", "value1" },
+                        { "var2", "value2" }
+                    })
+                }
+            };
+
+            // Act
+            var result = await client.SendMessageAsync(message);
+
+            // Assert
+            Assert.True(result.Succeeded);
+            Assert.Null(result.Error);
+
+            Assert.Equal("ok", result.ResponseMeta.Status);
+            Assert.Equal("27cf6ede7501a32d54d22abe17e3c154d2cae7f3", result.ResponseMeta.Uid);
+            Assert.Null(result.ResponseMeta.Message);
+
+            Assert.Equal(1234567890, result.Data.Message.Id);
+
+            builder.MockHttp.VerifyNoOutstandingRequest();
+        }
+
+        [Fact]
+        public async Task ReturnSuccededGivenVars()
+        {
+            // Arrange
+            var builder = new HttpPostageAppClientBuider()
+                .WithBaseUri("http://test")
+                .WithApiKey("successfull_api_key");
+
+            var client = builder.Build();
+
+            var message = new Message
+            {
+                Variables = new Dictionary<string, string> {
+                        { "var1", "value1" },
+                        { "var2", "value2" }
+                    }
+            };
+
+            // Act
+            var result = await client.SendMessageAsync(message);
+
+            // Assert
+            Assert.True(result.Succeeded);
+            Assert.Null(result.Error);
+
+            Assert.Equal("ok", result.ResponseMeta.Status);
+            Assert.Equal("27cf6ede7501a32d54d22abe17e3c154d2cae7f3", result.ResponseMeta.Uid);
+            Assert.Null(result.ResponseMeta.Message);
+
+            Assert.Equal(1234567890, result.Data.Message.Id);
+
+            builder.MockHttp.VerifyNoOutstandingRequest();
+        }
+
+        [Fact]
+        public async Task ReturnSuccededGivenRecipientOverride()
+        {
+            // Arrange
+            var builder = new HttpPostageAppClientBuider()
+                .WithBaseUri("http://test")
+                .WithApiKey("successfull_api_key");
+
+            var client = builder.Build();
+
+            var message = new Message
+            {
+                RecipientOverride = "override@example.com"
+            };
+
+            // Act
+            var result = await client.SendMessageAsync(message);
+
+            // Assert
+            Assert.True(result.Succeeded);
+            Assert.Null(result.Error);
+
+            Assert.Equal("ok", result.ResponseMeta.Status);
+            Assert.Equal("27cf6ede7501a32d54d22abe17e3c154d2cae7f3", result.ResponseMeta.Uid);
+            Assert.Null(result.ResponseMeta.Message);
+
+            Assert.Equal(1234567890, result.Data.Message.Id);
+
+            builder.MockHttp.VerifyNoOutstandingRequest();
+        }
+
+        [Fact]
         public async Task ReturnSuccededGivenFrom()
         {
             // Arrange
