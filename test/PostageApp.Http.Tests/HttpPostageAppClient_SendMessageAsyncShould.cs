@@ -40,6 +40,8 @@ namespace PostageApp.Http.Tests
             Assert.Null(result.ResponseMeta.Message);
 
             Assert.Equal(1234567890, result.Data.Message.Id);
+            Assert.Equal("http://YOUR_ACCOUNT.postageapp.com/projects/YOUR_PROJECT_ID/messages/MESSAGE_ID", result.Data.Message.Url);
+            Assert.Equal("ignored", result.Data.Message.Duplicate);
 
             builder.MockHttp.VerifyNoOutstandingRequest();
         }

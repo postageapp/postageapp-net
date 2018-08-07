@@ -5,7 +5,9 @@
     },
     "data": {
         "message": {
-            "id": 1234567890
+            "id": 1234567890,
+            "url": "http://YOUR_ACCOUNT.postageapp.com/projects/YOUR_PROJECT_ID/messages/MESSAGE_ID",
+            "duplicate": "ignored"
         }
     }
 }
