@@ -1,0 +1,13 @@
+{
+    "response": {
+        "uid": "27cf6ede7501a32d54d22abe17e3c154d2cae7f3",
+        "status": "ok"
+    },
+    "data": {
+        "message": {
+            "id": 1234567890,
+            "url": "http://YOUR_ACCOUNT.postageapp.com/projects/YOUR_PROJECT_ID/messages/MESSAGE_ID",
+            "duplicate": "ignored"
+        }
+    }
+}

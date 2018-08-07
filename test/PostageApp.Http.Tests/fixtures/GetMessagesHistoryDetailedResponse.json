@@ -1,0 +1,30 @@
+{
+    "response": {
+        "status": "ok",
+        "uid": null
+    },
+    "data": {
+        "date_range": [
+            "2018-06-28",
+            "2018-06-29"
+        ],
+        "messages_history": [
+            {
+                "unique_id": "36598cc85e020a01384ea7653872c8e87536869c@mailer.postageapp.com",
+                "message_id": 23490345,
+                "uid": "36598cc85e020a01384ea7653872c8e87536869c",
+                "recipient": "recipient@example.com",
+                "status": "completed",
+                "created_at": "2017-03-30 21:24:41"
+            },
+            {
+                "unique_id": "cdfc8a4254ab3f44f37f0de9b50f6a3cb402030a@mailer.postageapp.com",
+                "message_id": 23490491,
+                "uid": "cdfc8a4254ab3f44f37f0de9b50f6a3cb402030a",
+                "recipient": "recipient@example.net",
+                "status": "completed",
+                "created_at": "2017-03-30 21:25:29"
+            }
+        ]
+    }
+}

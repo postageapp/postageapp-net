@@ -1,7 +1,36 @@
-*.user
-*/obj/*
-*/bin/*
+*.swp
+*.*~
+project.lock.json
+.DS_Store
+*.pyc
+
+# Visual Studio Code
+.vscode
+
+# User-specific files
 *.suo
-*/App.config
-PostageApp/obj/Debug/PostageApp.csproj.FileListAbsolute.txt
-TWG.PostageApp.Net45.Portable.Tests/App.config
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+nupkgs/
+bld/
+[Bb]in/
+[Oo]bj/
+msbuild.log
+msbuild.err
+msbuild.wrn
+nupkgs/
+
+logs/
+
+# Visual Studio 2015
+.vs/

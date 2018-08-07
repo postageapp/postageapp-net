@@ -1,0 +1,21 @@
+{
+    "response": {
+        "status": "ok",
+        "uid": null
+    },
+    "data": {
+        "account": {
+            "name": "AccountName",
+            "url": "https://account-name.postageapp.com/",
+            "transmissions": {
+                "today": 84,
+                "this_month": 3750,
+                "overall": 291517
+            },
+            "users": {
+                "email1@email.com": "User 1",
+                "email2@email.com": "User2"
+            }
+        }
+    }
+}

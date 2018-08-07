@@ -1,0 +1,6 @@
+{
+    "response": {
+        "status": "invalid_utf8",
+        "message": "The posted content is not encoded in UTF8 or contains invalid characters. Error detected at byte 10."
+    }
+}

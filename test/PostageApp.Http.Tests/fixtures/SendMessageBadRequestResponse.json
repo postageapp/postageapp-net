@@ -1,0 +1,7 @@
+{
+    "response": {
+        "uid": "27cf6ede7501a32d54d22abe17e3c154d2cae7f3",
+        "status": "bad_request",
+        "message": "Some error message. Like: you forgot the recipients!"
+    }
+}

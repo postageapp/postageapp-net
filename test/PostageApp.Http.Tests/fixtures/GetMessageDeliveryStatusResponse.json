@@ -1,0 +1,20 @@
+{
+    "response": {
+        "status": "ok",
+        "uid": "some_uid"
+    },
+    "data": {
+        "delivery_status": [
+            {
+                "unique_id": "123@x.mailer.postageapp.com",
+                "recipient": "completed@y.com",
+                "status": "completed"
+            },
+            {
+                "unique_id": "456@x.mailer.postageapp.com",
+                "recipient": "queued@y.com",
+                "status": "queued"
+            }
+        ]
+    }
+}

@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<configuration>
-  <appSettings>
-    <add key="testRecipient" value="YOUR_EMAIL_ADDRESS_HERE"/>
-    <add key="apiKey" value="YOUR_API_KEY_HERE"/>
-  </appSettings>
-</configuration>
