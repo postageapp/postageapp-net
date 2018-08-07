@@ -45,6 +45,7 @@ namespace PostageApp.Http.Tests
             SetupGetProjectInfoMockHttp();
             SetupGetSuppressionListMockHttp();
             SetupGetMessagesMockHttp();
+            SetupSendMessageMockHttp();
 
             return new HttpPostageAppClient(
                 MockOptions.Object,
@@ -206,6 +207,117 @@ namespace PostageApp.Http.Tests
             MockHttp.When(HttpMethod.Post, uri)
                 .WithContent(BuildContentUid("successfull_api_key", "some_uid"))
                 .Respond("application/json", ReadFixtureFile("GetMessageTransmissionsResponse"));
+        }
+
+        private void SetupSendMessageMockHttp()
+        {
+            var uri = $"{_baseUri}/v.1.0/send_message.json";
+
+            SetupGeneralConflict(uri, (t) => BuildEmptyMessageContent(t));
+            SetupGeneralLocked(uri, (t) => BuildEmptyMessageContent(t));
+            SetupGeneralUnauthorized(uri, (t) => BuildEmptyMessageContent(t));
+
+            MockHttp.When(HttpMethod.Post, uri)
+                .WithContent(BuildEmptyMessageContent("bad_request_api_key"))
+                .Respond(HttpStatusCode.BadRequest, "application/json", ReadFixtureFile("SendMessageBadRequestResponse"));
+
+            MockHttp.When(HttpMethod.Post, uri)
+                .WithContent(BuildEmptyMessageContent("precondition_failed_key"))
+                .Respond(HttpStatusCode.PreconditionFailed, "application/json", ReadFixtureFile("SendMessagePreconditionFailedResponse"));
+
+            MockHttp.When(HttpMethod.Post, uri)
+                .WithContent(BuildEmptyMessageContent("invalid_utf8_failed_key"))
+                .Respond(HttpStatusCode.NotAcceptable, "application/json", ReadFixtureFile("SendMessageInvalidUTF8Response"));
+
+            MockHttp.When(HttpMethod.Post, uri)
+                .WithContent(BuildMessageWithRecipientsContent("successfull_api_key"))
+                .Respond("application/json", ReadFixtureFile("SendMessageResponse"));
+
+            MockHttp.When(HttpMethod.Post, uri)
+                .WithContent(BuildMessageWithFromHeaderContent("successfull_api_key"))
+                .Respond("application/json", ReadFixtureFile("SendMessageResponse"));
+
+            MockHttp.When(HttpMethod.Post, uri)
+                .WithContent(BuildMessageWithSubjectHeaderContent("successfull_api_key"))
+                .Respond("application/json", ReadFixtureFile("SendMessageResponse"));
+
+            MockHttp.When(HttpMethod.Post, uri)
+                .WithContent(BuildMessageWithReplyToHeaderContent("successfull_api_key"))
+                .Respond("application/json", ReadFixtureFile("SendMessageResponse"));
+
+            MockHttp.When(HttpMethod.Post, uri)
+                .WithContent(BuildMessageWithUidContent("successfull_api_key"))
+                .Respond("application/json", ReadFixtureFile("SendMessageResponse"));
+
+            MockHttp.When(HttpMethod.Post, uri)
+                .WithContent(BuildMessageWithAtachmentContent("successfull_api_key"))
+                .Respond("application/json", ReadFixtureFile("SendMessageResponse"));
+
+            MockHttp.When(HttpMethod.Post, uri)
+                .WithContent(BuildMessageWithCustomHeaderContent("successfull_api_key"))
+                .Respond("application/json", ReadFixtureFile("SendMessageResponse"));
+
+            MockHttp.When(HttpMethod.Post, uri)
+                .WithContent(BuildMessageWithTemplateContent("successfull_api_key"))
+                .Respond("application/json", ReadFixtureFile("SendMessageResponse"));
+
+            MockHttp.When(HttpMethod.Post, uri)
+                .WithContent(BuildMessageWithContentContent("successfull_api_key"))
+                .Respond("application/json", ReadFixtureFile("SendMessageResponse"));
+
+            MockHttp.When(HttpMethod.Post, uri)
+                .WithContent(BuildEmptyMessageContent("successfull_api_key"))
+                .Respond("application/json", ReadFixtureFile("SendMessageResponse"));
+        }
+
+        private string BuildMessageWithFromHeaderContent(string apiKey)
+        {
+            return "{\"api_key\":\"" + apiKey + "\",\"uid\":null,\"arguments\":{\"template\":null,\"recipient_override\":null,\"recipients\":{},\"headers\":{\"from\":\"e1@example.com\"},\"content\":{},\"attachments\":{},\"variables\":{}}}";
+        }
+
+        private string BuildMessageWithSubjectHeaderContent(string apiKey)
+        {
+            return "{\"api_key\":\"" + apiKey + "\",\"uid\":null,\"arguments\":{\"template\":null,\"recipient_override\":null,\"recipients\":{},\"headers\":{\"subject\":\"Subject\"},\"content\":{},\"attachments\":{},\"variables\":{}}}";
+        }
+
+        private string BuildMessageWithReplyToHeaderContent(string apiKey)
+        {
+            return "{\"api_key\":\"" + apiKey + "\",\"uid\":null,\"arguments\":{\"template\":null,\"recipient_override\":null,\"recipients\":{},\"headers\":{\"reply-to\":\"e1@example.com\"},\"content\":{},\"attachments\":{},\"variables\":{}}}";
+        }
+
+        private string BuildMessageWithCustomHeaderContent(string apiKey)
+        {
+            return "{\"api_key\":\"" + apiKey + "\",\"uid\":null,\"arguments\":{\"template\":null,\"recipient_override\":null,\"recipients\":{},\"headers\":{\"custom_header\":\"value\"},\"content\":{},\"attachments\":{},\"variables\":{}}}";
+        }
+
+        private string BuildMessageWithRecipientsContent(string apiKey)
+        {
+            return "{\"api_key\":\"" + apiKey + "\",\"uid\":null,\"arguments\":{\"template\":null,\"recipient_override\":null,\"recipients\":{\"e1@example.com\":null,\"e2@example.com\":null},\"headers\":{},\"content\":{},\"attachments\":{},\"variables\":{}}}";
+        }
+
+        private string BuildMessageWithUidContent(string apiKey)
+        {
+            return "{\"api_key\":\"" + apiKey + "\",\"uid\":\"27cf6ede7501a32d54d22abe17e3c154d2cae7f3\",\"arguments\":{\"template\":null,\"recipient_override\":null,\"recipients\":{},\"headers\":{},\"content\":{},\"attachments\":{},\"variables\":{}}}";
+        }
+
+        private string BuildMessageWithAtachmentContent(string apiKey)
+        {
+            return "{\"api_key\":\"" + apiKey + "\",\"uid\":null,\"arguments\":{\"template\":null,\"recipient_override\":null,\"recipients\":{},\"headers\":{},\"content\":{},\"attachments\":{\"file.txt\":{\"content_type\":\"text\",\"content\":\"SGVsbG8gV29ybGQh\"}},\"variables\":{}}}";
+        }
+
+        private string BuildMessageWithTemplateContent(string apiKey)
+        {
+            return "{\"api_key\":\"" + apiKey + "\",\"uid\":null,\"arguments\":{\"template\":\"template1\",\"recipient_override\":null,\"recipients\":{},\"headers\":{},\"content\":{},\"attachments\":{},\"variables\":{}}}";
+        }
+
+        private string BuildMessageWithContentContent(string apiKey)
+        {
+            return "{\"api_key\":\"" + apiKey + "\",\"uid\":null,\"arguments\":{\"template\":null,\"recipient_override\":null,\"recipients\":{},\"headers\":{},\"content\":{\"text/plain\":\"Text Content\",\"text/html\":\"HTML Content\"},\"attachments\":{},\"variables\":{}}}";
+        }
+
+        private string BuildEmptyMessageContent(string apiKey)
+        {
+            return "{\"api_key\":\"" + apiKey + "\",\"uid\":null,\"arguments\":{\"template\":null,\"recipient_override\":null,\"recipients\":{},\"headers\":{},\"content\":{},\"attachments\":{},\"variables\":{}}}";
         }
 
         private string BuildContentUid(string apiKey, string uid)

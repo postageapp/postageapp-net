@@ -17,6 +17,10 @@
     <None Remove="fixtures\GetMetricsResponse.json" />
     <None Remove="fixtures\GetProjectInfoResponse.json" />
     <None Remove="fixtures\GetSuppressionListResponse.json" />
+    <None Remove="fixtures\SendMessageBadRequestResponse.json" />
+    <None Remove="fixtures\SendMessageInvalidUTF8Response.json" />
+    <None Remove="fixtures\SendMessagePreconditionFailedResponse.json" />
+    <None Remove="fixtures\SendMessageResponse.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,6 +49,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="fixtures\GetProjectInfoResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fixtures\SendMessagePreconditionFailedResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fixtures\SendMessageInvalidUTF8Response.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fixtures\SendMessageBadRequestResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fixtures\SendMessageResponse.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="fixtures\GetSuppressionListResponse.json">

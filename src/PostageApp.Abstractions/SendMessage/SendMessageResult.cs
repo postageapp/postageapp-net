@@ -34,7 +34,7 @@
         {
             return new SendMessageResult
             {
-                Error = SendMessageErrorCode.Locked,
+                Error = SendMessageErrorCode.BadRequest,
                 ResponseMeta = responseMeta
             };
         }
