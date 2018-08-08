@@ -1,0 +1,22 @@
+{
+    "response": {
+        "status": "ok",
+        "uid": null
+    },
+    "data": {
+        "recipients": {
+            "email1@example.com": {
+                "status": "rejected",
+                "suppression_state": "hard_bounce",
+                "blocked_until": "2014-02-09T17:32:31Z",
+                "message": "No Such User Here"
+            },
+            "email2@example.org": {
+                "status": "warning",
+                "suppression_state": "soft_bounce",
+                "blocked_until": "2014-04-07T17:32:31Z",
+                "message": "Requested action not taken: mailbox temporarily unavailable"
+            }
+        }
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "response": {
+        "status": "precondition_failed",
+        "message": "The content of your email messages needs to be addressed. Please contact support for further information."
+    }
+}

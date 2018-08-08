@@ -1,0 +1,26 @@
+{
+    "response": {
+        "status": "ok",
+        "uid": null
+    },
+    "data": {
+        "key1": {
+            "project_id": 5,
+            "template": "new_message_notification",
+            "transmissions_total": 2,
+            "transmissions_failed": 0,
+            "transmissions_completed": 2,
+            "created_at": "2018-05-30T11:01:21-04:00",
+            "will_purge_at": "2018-06-29T11:01:21-04:00"
+        },
+        "key2": {
+            "project_id": 5,
+            "template": "pm_notification",
+            "transmissions_total": 1,
+            "transmissions_failed": 1,
+            "transmissions_completed": 0,
+            "created_at": "2018-05-30T11:18:01-04:00",
+            "will_purge_at": "2018-06-29T11:18:01-04:00"
+        }
+    }
+}

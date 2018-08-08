@@ -1,0 +1,243 @@
+{
+    "response": {
+        "status": "ok",
+        "uid": null,
+        "message": "metrics"
+    },
+    "data": {
+        "metrics": {
+            "hour": {
+                "delivered": {
+                    "current_percent": 100.0,
+                    "previous_percent": 100.0,
+                    "diff_percent": 0.0,
+                    "current_value": 1,
+                    "previous_value": 1
+                },
+                "opened": {
+                    "current_percent": 0.0,
+                    "previous_percent": 100.0,
+                    "diff_percent": -100.0,
+                    "current_value": 0,
+                    "previous_value": 1
+                },
+                "clicked": {
+                    "current_percent": 0.0,
+                    "previous_percent": 100.0,
+                    "diff_percent": -100.0,
+                    "current_value": 0,
+                    "previous_value": 1
+                },
+                "failed": {
+                    "current_percent": 0.0,
+                    "previous_percent": 0.0,
+                    "diff_percent": 0.0,
+                    "current_value": 0,
+                    "previous_value": 0
+                },
+                "rejected": {
+                    "current_percent": 0.0,
+                    "previous_percent": 0.0,
+                    "diff_percent": 0.0,
+                    "current_value": 0,
+                    "previous_value": 0
+                },
+                "spammed": {
+                    "current_percent": 0.0,
+                    "previous_percent": 0.0,
+                    "diff_percent": 0.0,
+                    "current_value": 0,
+                    "previous_value": 0
+                },
+                "created": {
+                    "current_percent": 0.0,
+                    "previous_percent": 0.0,
+                    "diff_percent": 0.0,
+                    "current_value": 1,
+                    "previous_value": 1
+                },
+                "queued": {
+                    "current_percent": 0.0,
+                    "previous_percent": 0.0,
+                    "diff_percent": 0.0,
+                    "current_value": 0,
+                    "previous_value": 0
+                }
+            },
+            "date": {
+                "delivered": {
+                    "current_percent": 96.47058823529412,
+                    "previous_percent": 91.52542372881356,
+                    "diff_percent": 4.945164506480552,
+                    "current_value": 82,
+                    "previous_value": 108
+                },
+                "opened": {
+                    "current_percent": 29.41176470588235,
+                    "previous_percent": 27.11864406779661,
+                    "diff_percent": 2.2931206380857425,
+                    "current_value": 25,
+                    "previous_value": 32
+                },
+                "clicked": {
+                    "current_percent": 27.058823529411764,
+                    "previous_percent": 30.508474576271187,
+                    "diff_percent": -3.4496510468594224,
+                    "current_value": 23,
+                    "previous_value": 36
+                },
+                "failed": {
+                    "current_percent": 3.5294117647058822,
+                    "previous_percent": 5.084745762711864,
+                    "diff_percent": -1.555333998005982,
+                    "current_value": 3,
+                    "previous_value": 6
+                },
+                "rejected": {
+                    "current_percent": 0.0,
+                    "previous_percent": 1.694915254237288,
+                    "diff_percent": -1.694915254237288,
+                    "current_value": 0,
+                    "previous_value": 2
+                },
+                "spammed": {
+                    "current_percent": 0.0,
+                    "previous_percent": 0.0,
+                    "diff_percent": 0.0,
+                    "current_value": 0,
+                    "previous_value": 0
+                },
+                "created": {
+                    "current_percent": 0.0,
+                    "previous_percent": 0.0,
+                    "diff_percent": 0.0,
+                    "current_value": 85,
+                    "previous_value": 118
+                },
+                "queued": {
+                    "current_percent": 0.0,
+                    "previous_percent": 0.0,
+                    "diff_percent": 0.0,
+                    "current_value": 0,
+                    "previous_value": 2
+                }
+            },
+            "week": {
+                "delivered": {
+                    "current_percent": 91.875,
+                    "previous_percent": 94.54545454545455,
+                    "diff_percent": -2.6704545454545467,
+                    "current_value": 735,
+                    "previous_value": 988
+                },
+                "opened": {
+                    "current_percent": 29.375,
+                    "previous_percent": 31.961722488038276,
+                    "diff_percent": -2.5867224880382764,
+                    "current_value": 235,
+                    "previous_value": 334
+                },
+                "clicked": {
+                    "current_percent": 22.875,
+                    "previous_percent": 23.0622009569378,
+                    "diff_percent": -0.1872009569378008,
+                    "current_value": 183,
+                    "previous_value": 241
+                },
+                "failed": {
+                    "current_percent": 5.75,
+                    "previous_percent": 4.497607655502392,
+                    "diff_percent": 1.2523923444976077,
+                    "current_value": 46,
+                    "previous_value": 47
+                },
+                "rejected": {
+                    "current_percent": 1.125,
+                    "previous_percent": 0.4784688995215311,
+                    "diff_percent": 0.6465311004784688,
+                    "current_value": 9,
+                    "previous_value": 5
+                },
+                "spammed": {
+                    "current_percent": 0.0,
+                    "previous_percent": 0.0,
+                    "diff_percent": 0.0,
+                    "current_value": 0,
+                    "previous_value": 0
+                },
+                "created": {
+                    "current_percent": 0.0,
+                    "previous_percent": 0.0,
+                    "diff_percent": 0.0,
+                    "current_value": 800,
+                    "previous_value": 1045
+                },
+                "queued": {
+                    "current_percent": 0.0,
+                    "previous_percent": 0.0,
+                    "diff_percent": 0.0,
+                    "current_value": 10,
+                    "previous_value": 5
+                }
+            },
+            "month": {
+                "delivered": {
+                    "current_percent": 94.06120331950207,
+                    "previous_percent": 92.08057395143487,
+                    "diff_percent": 1.9806293680671985,
+                    "current_value": 3627,
+                    "previous_value": 3337
+                },
+                "opened": {
+                    "current_percent": 30.990663900414937,
+                    "previous_percent": 22.792494481236204,
+                    "diff_percent": 8.198169419178733,
+                    "current_value": 1195,
+                    "previous_value": 826
+                },
+                "clicked": {
+                    "current_percent": 20.720954356846473,
+                    "previous_percent": 12.003311258278146,
+                    "diff_percent": 8.717643098568328,
+                    "current_value": 799,
+                    "previous_value": 435
+                },
+                "failed": {
+                    "current_percent": 4.6161825726141075,
+                    "previous_percent": 6.043046357615894,
+                    "diff_percent": -1.4268637850017862,
+                    "current_value": 178,
+                    "previous_value": 219
+                },
+                "rejected": {
+                    "current_percent": 0.5446058091286307,
+                    "previous_percent": 1.5452538631346577,
+                    "diff_percent": -1.0006480540060272,
+                    "current_value": 21,
+                    "previous_value": 56
+                },
+                "spammed": {
+                    "current_percent": 0.0,
+                    "previous_percent": 0.0,
+                    "diff_percent": 0.0,
+                    "current_value": 0,
+                    "previous_value": 0
+                },
+                "created": {
+                    "current_percent": 0.0,
+                    "previous_percent": 0.0,
+                    "diff_percent": 0.0,
+                    "current_value": 3856,
+                    "previous_value": 3624
+                },
+                "queued": {
+                    "current_percent": 0.0,
+                    "previous_percent": 0.0,
+                    "diff_percent": 0.0,
+                    "current_value": 30,
+                    "previous_value": 12
+                }
+            }
+        }
+    }
+}

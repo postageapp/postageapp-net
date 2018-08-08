@@ -1,0 +1,36 @@
+image: Visual Studio 2017
+version: 2.0.0-beta-{build}
+
+before_build:
+  - ps: nuget restore
+  - ps: choco install codecov
+
+pull_requests:
+  do_not_increment_build_number: true
+
+build_script:
+  - ps: $buildNumber = "{0:d8}" -f [convert]::ToInt32($env:APPVEYOR_BUILD_NUMBER)
+  - ps: Write-Host "Version Suffix:" $buildNumber
+  - ps: dotnet pack -c Release /p:BuildNumber=$buildNumber --include-symbols --output ../../nupkgs/beta
+
+test_script:
+  - ps: dotnet test -c Release test/PostageApp.Http.Tests /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+
+after_test:
+  - ps: codecov -f "./test/PostageApp.Http.Tests/coverage.opencover.xml"
+
+artifacts:
+  - path: ./nupkgs/beta/**/*.nupkg
+    name: NuGet
+
+deploy:
+  - provider: NuGet
+    name: MyGet Beta Channel
+    on:
+      branch: netcore
+    server: https://www.myget.org/F/postageapp/api/v2/package
+    api_key:
+      secure: a+GHoopZDn5PyBTCv8FV3TgvvDZ04XE4F3u9MDWShc8ORDSkWn1gi8WBov8UKk81
+    skip_symbols: false
+    symbol_server: https://www.myget.org/F/postageapp/symbols/api/v2/package
+    artifact: /.*\.nupkg/

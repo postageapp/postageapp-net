@@ -1,6 +1,8 @@
-#PostageApp .NET
+# PostageApp .NET
 
-This client library will allow you to quickly send email from a .NET 3.5+ application via the [PostageApp](http://postageapp.com) API. 
+[![codecov](https://codecov.io/gh/vad3x/postageapp-net/branch/master/graph/badge.svg)](https://codecov.io/gh/vad3x/postageapp-net)
+
+This client library will allow you to quickly send email from a .NET Core application via the [PostageApp](http://postageapp.com) API.
 Specify one or more recipients, your template along with variables to substitute, enjoy open and click tracking, and quick, reliable delivery.
 
 ## Add library reference
@@ -9,11 +11,9 @@ Specify one or more recipients, your template along with variables to substitute
 
 To install PostageApp, run the following command in the *Package Manager Console*:
 
-	PM> Install-Package PostageApp
-
-### Downloading the compiled binary
-
-The latest binary package can be found [here](http://postageapp.com/postageapp-net/PostageApp.0.0.1.zip).
+```
+    PM> Install-Package PostageApp
+```
 
 ## Obtaining an API key
 
@@ -22,21 +22,47 @@ in your account each project gets its own API key. Click through to the project 
 
 ## Sending an email
 
-The following is a the absolute minimum required to send an email.
+In general you will use .net core DI infrastructure.
 
-	var client = new PostageApp.Client("YOUR_API_KEY");
+Registration:
 
-	client.SendMessage(new SendMessageRequest()
-		{
-			Recipient = "Alan Smithee <alan.smithee@gmail.com>",
-			RecipientOverride = "YOUR_EMAIL_ADDRESS_HERE_DURING_DEVELOPMENT",
-			Subject = "Thank you for your order",
-			From = "Acme Widgets <widgets@acme.com>",
-			Text = "Your order has been processed and will ship shortly.",
-			Html = "<p>Your order has been processed and will ship shortly.</p>"
-		});
+```cs
 
-Setting the `RecipientOverride` property allows you to safely redirect all outgoing email to your own address while in development mode.
+services.AddPostageAppClient(options => {
+    options.ApiKey = "Your Key";
+});
+
+```
+
+Using:
+
+```cs
+
+class MyController
+{
+    private readonly IPostageAppClient _postageAppClient;
+
+    MyController(IPostageAppClient postageAppClient)
+    {
+        _postageAppClient = postageAppClient;
+    }
+
+
+    public async Task<ActionResult> Action()
+    {
+        GetAccountInfoResult result = await _postageAppClient.GetAccountInfoAsync();
+        if (!result.Succeeded)
+        {
+            // TODO error
+        }
+
+        // TODO action!
+
+        return Ok();
+    }
+}
+
+```
 
 ## Passing variables to templates
 
@@ -46,82 +72,61 @@ Your app doesn't need to concern itself with rendering html emails and you can u
 
 Once you have created a template that you want to use, specify its unique `slug` in the Template property as in the example below.
 
-	client.SendMessage(new SendMessageRequest()
-		{
-			Recipient = "Alan Smithee <alan.smithee@gmail.com>",
-			Template = "YOUR_TEMPLATE_SLUG",
-			Variables = new Dictionary<string, string>()
-				{
-					{"first_name", "Alan"},
-					{"last_name", "Smithee"},
-					{"order_id", "555"}
-			   }
-		});
-
-## Multiple recipients
-
-Emails aren't restricted to just one recipient. Instead of setting the `Recipient` property, set the `Recipients` property
-to a list of `Recipient` objects, each with its own set of variables.
-
-	var sendMessageRequest = new SendMessageRequest();
-
-    sendMessageRequest.Recipients.Add(new Recipient("Alan Smithee <alan.smithee@gmail.com>")
+```cs
+    await client.SendMessageAsync(new Message
         {
+            Recipients = new MessageRecipient("Alan Smithee <alan.smithee@gmail.com>"),
+            Template = "YOUR_TEMPLATE_SLUG",
             Variables = new Dictionary<string, string>()
                 {
                     {"first_name", "Alan"},
-					{"last_name", "Smithee"},
-			        {"order_id", "555"}
-                }
+                    {"last_name", "Smithee"},
+                    {"order_id", "555"}
+               }
         });
+```
 
-    sendMessageRequest.Recipients.Add(new Recipient("Rick James <rick.james@gmail.com>")
-        {
-            Variables = new Dictionary<string, string>()
+## Multiple recipients
+
+Emails aren't restricted to just one recipient. Set the `Recipients` property
+to a list of `MessageRecipient` objects, each with its own set of variables.
+
+```cs
+    var message = new Message();
+
+    message.Recipients = new []
+    {
+        new MessageRecipient("Alan Smithee <alan.smithee@gmail.com>", new Dictionary<string, string>()
+                {
+                    {"first_name", "Alan"},
+                    {"last_name", "Smithee"},
+                    {"order_id", "555"}
+                }),
+
+        new MessageRecipient("Rick James <rick.james@gmail.com>", new Dictionary<string, string>()
                 {
                     {"first_name", "Rick"},
                     {"last_name", "James"},
                     {"order_id", "556"}
-                }
-        });       
+                }),
+    }
+```
 
 ## Attaching files
 
 In addition to attaching files to templates in the PostageApp project dashboard, they can be attached by your app at runtime.
-Simply add an `Attachment` to the `Attachments` collection, providing a `Stream`, Filename and ContentType for each file attached.
+Simply add an `MessageAttachment` to the `Attachments` collection, providing a File bytes, Filename and ContentType for each file attached.
 
-    sendMessageRequest.Attachments.Add(new Attachment(fileStream, "invoice.pdf", "application/pdf"));
+```cs
+    message.Attachments.Add("invoice.pdf", new MessageAttachment(fileBytes, "application/pdf"));
+```
 
 ## Adding custom headers
 
 The `From`, `Subject` and `ReplyTo` properties are shortcuts for the following syntax.
 
-	sendMessageRequest.Headers.Add("From", "Acme Widgets <widgets@acme.com>");
-	sendMessageRequest.Headers.Add("Subject", "Your order has shipped!");
-	sendMessageRequest.Headers.Add("Reply-To", "Acme Support <support@acme.com>");
+    message.Headers.Add("from", "Acme Widgets <widgets@acme.com>");
+    message.Headers.Add("subject", "Your order has shipped!");
+    message.Headers.Add("reply-to", "Acme Support <support@acme.com>");
 
 You are free to add any necessary email headers using this method.
-
-## Handling exceptions
-
-An attempt is made to catch all internal `WebException` and re-throw them as `SendMessageException`, with the servers
-error message and status code parsed from the response.
-
-Common exceptions:
-
-* **400** - *Bad Request*: You have not provided enough information to send an email.
-* **401** - *Unauthorized*: Invalid API key.
-* **412** - *Precondition Failed*: Some part of the request is invalid. Incorrect template slug? Invalid email address?
-
-## Building the Nuget package
-
-This library is published as a NuGet package, which can be rebuilt after modifications have been made by issuing the following commands.
-
-	NuGet.exe pack PostageApp\PostageApp.csproj
-
-You can test locally by specifying your project folder as a NuGet repository source and adding the package to a new project.
-
-When you are ready to publish, don't forget to bump the AssemblyInfo version number for the project, build and then run the following commands to push.
-
-	NuGet.exe setApiKey YOUR_API_KEY
-	NuGet.exe push PostageApp.X.X.X.nupkg

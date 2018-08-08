@@ -1,0 +1,30 @@
+{
+    "response": {
+        "status": "ok",
+        "uid": null
+    },
+    "data": {
+        "messages_history": [
+            {
+                "id": 19782,
+                "uid": "36598cc85e020a01384ea7653872c8e87536869c",
+                "subject": "Newsletter No. 3326",
+                "created_at": "2013-03-30 21:24:41",
+                "count": 399,
+                "queued_count": 0,
+                "failed_count": 1,
+                "completed_count": 398
+            },
+            {
+                "id": 19944,
+                "uid": "ee69a0e058750c5cb5b417b3dd01bf4685b4933d",
+                "subject": "System Update Notice",
+                "created_at": "2013-08-13 16:05:02",
+                "count": 400,
+                "queued_count": 0,
+                "failed_count": 0,
+                "completed_count": 1
+            }
+        ]
+    }
+}
